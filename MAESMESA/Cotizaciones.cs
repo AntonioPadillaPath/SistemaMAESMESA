@@ -105,14 +105,31 @@ namespace MAESMESA
 
             cn.cerrarCon();
 
-            btnNuevaCotizacion.Enabled = false;
-            btnEnviar.Enabled = false;
 
             DateTime fecha = DateTime.Today;
 
             string year = fecha.Year.ToString();
+            int year1 = fecha.Year;
+            int newYear = Convert.ToInt32(cn.consultaYear());
+            cn.cerrarCon();
 
-            txtNumeroC.Text = "C" + year + "-" + cn.consultaCotizaciones();
+            if (year1 != newYear)
+            {
+                cn.updateYear(newYear + 1);
+                cn.cerrarCon();
+                int index = 0;
+                cn.updateIndexCot(index);
+                cn.cerrarCon();
+            }
+
+            //txtNumeroC.Text = "C" + year + "-" + cn.consultaCotizaciones();
+            string parte1 = "C" + year1.ToString();
+            cn.cerrarCon();
+
+            string parte2 = cn.consultaCotizacionesIndex().ToString();
+            cn.cerrarCon();
+
+            txtNumeroC.Text = parte1 + "-" + parte2;
 
         }
 
@@ -159,8 +176,8 @@ namespace MAESMESA
 
             for(int indice = 0; indice < totalFilas; indice ++)
             {
-                double precio = Convert.ToDouble((string)dgvPedido.Rows[indice].Cells[3].Value);
-                int unidad = Convert.ToInt32((string)dgvPedido.Rows[indice].Cells[2].Value);
+                double precio = Convert.ToDouble((string)dgvPedido.Rows[indice].Cells[2].Value);
+                int unidad = Convert.ToInt32((string)dgvPedido.Rows[indice].Cells[3].Value);
 
                 double importe = precio * unidad;
 
@@ -226,6 +243,12 @@ namespace MAESMESA
                 btnNuevaCotizacion.Enabled = true;
                 btnEnviar.Enabled = true;
 
+                //Itera el número del index
+                int index = Convert.ToInt32(cn.consultaCotizacionesIndex());
+                cn.cerrarCon();
+                cn.updateIndexCot(index);
+                cn.cerrarCon();
+
 
                 //Aquí comienza la inserción de los productos en otra tabla
 
@@ -280,15 +303,18 @@ namespace MAESMESA
             DateTime fecha = DateTime.Today;
 
             string year = fecha.Year.ToString();
-            //string newYear = cn.consultaYear();
+            int year1 = fecha.Year;
+            int newYear = Convert.ToInt32(cn.consultaYear());
+            cn.cerrarCon();
 
-            //int newYear = Convert.ToInt32(cn.consultaYear());
-
-            /*if(year != cn.consultaYear())
+            if (year1 != newYear)
             {
-                cn.updateYear(fecha.Year + 1);
-                cn.updateIndexCot(0);
-            }*/
+                cn.updateYear(newYear + 1);
+                cn.cerrarCon();
+                int index = 0;
+                cn.updateIndexCot(index);
+                cn.cerrarCon();
+            }
 
 
             //Comienza código para reiniciar la DataGriView
@@ -315,7 +341,14 @@ namespace MAESMESA
 
 
 
-            txtNumeroC.Text = "C" + year + "-" + cn.consultaCotizaciones();
+            //txtNumeroC.Text = "C" + year + "-" + cn.consultaCotizaciones();
+            string parte1 = "C" + year1.ToString();
+            cn.cerrarCon();
+
+            string parte2 = cn.consultaCotizacionesIndex().ToString();
+            cn.cerrarCon();
+
+            txtNumeroC.Text = parte1 + "-" + parte2;
 
             txtNombreC.Enabled = true;
             txtNumeroC.Enabled = true;
@@ -365,6 +398,7 @@ namespace MAESMESA
                 string postal = txtPostalC.Text;
                 string rfc = txtRFCC.Text;
                 string atiende = txtAtiendeC.Text;
+                string numero = txtNumeroC.Text;
                 /*string col0 = this.dgvPedido.CurrentRow.Cells[0].Value.ToString();
                 string col1 = this.dgvPedido.CurrentRow.Cells[1].Value.ToString();
                 string col2 = this.dgvPedido.CurrentRow.Cells[2].Value.ToString();
@@ -373,7 +407,7 @@ namespace MAESMESA
                 
 
                 Pedidos pedidos = new Pedidos(nombre, direccion, ciudad, estado, tel, email, postal, 
-                    rfc, atiende/*, col0, col1, col2, col3, col4*/);
+                    rfc, atiende, numero/*, col0, col1, col2, col3, col4*/);
                 pedidos.Show();
             }
 

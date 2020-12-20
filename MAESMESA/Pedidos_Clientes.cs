@@ -12,12 +12,11 @@ using Negocios;
 
 namespace MAESMESA
 {
-    public partial class Cotizaciones_Clientes : Form
+    public partial class Pedidos_Clientes : Form
     {
-
         ConexionSQLN cn = new ConexionSQLN();
 
-        public Cotizaciones_Clientes()
+        public Pedidos_Clientes()
         {
             InitializeComponent();
 
@@ -41,13 +40,12 @@ namespace MAESMESA
             string postal = this.dgvSeleccionarCliente.CurrentRow.Cells[4].Value.ToString();
             string rfc = this.dgvSeleccionarCliente.CurrentRow.Cells[7].Value.ToString();
 
-            Cotizaciones dato = new Cotizaciones(nombre, direccion, ciudad, estado, telefono, email,
+            Pedidos dato = new Pedidos(nombre, direccion, ciudad, estado, telefono, email,
                 postal, rfc);
 
             dato.Show();
-            
-            this.Hide();
 
+            this.Hide();
         }
     }
 }

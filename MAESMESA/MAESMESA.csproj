@@ -82,6 +82,12 @@
     <Compile Include="Pedidos.Designer.cs">
       <DependentUpon>Pedidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pedidos_Clientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pedidos_Clientes.Designer.cs">
+      <DependentUpon>Pedidos_Clientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Productos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usuarios.Designer.cs">
+      <DependentUpon>Usuarios.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Clientes.resx">
       <DependentUpon>Clientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +138,9 @@
     <EmbeddedResource Include="Pedidos.resx">
       <DependentUpon>Pedidos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pedidos_Clientes.resx">
+      <DependentUpon>Pedidos_Clientes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Productos.resx">
       <DependentUpon>Productos.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +154,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Usuarios.resx">
+      <DependentUpon>Usuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Pedidos.Designer._Clientescs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -164,6 +183,48 @@
       <Project>{326f3779-0846-4bee-bd68-2bff88dff44d}</Project>
       <Name>Negocios</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\140.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MAESMESA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\140al100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Team.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MAESMESA_azul.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\azulMarinoal100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blancoal100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cerrar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\min.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1821al100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhiteWall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\usuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pinturaAmarilla.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MAESMESAwhite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
