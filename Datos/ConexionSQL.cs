@@ -28,7 +28,7 @@ namespace Datos
 
             con.Open();
 
-            string Query = "Select Count(*) From UsuariosEjemplo5 where Usuario = '" + Usuario + "'" +
+            string Query = "Select Count(*) From Usuarios where Usuario = '" + Usuario + "'" +
                 " and Contrasena = '" + Contrasena + "'";
 
             SqlCommand cmd = new SqlCommand(Query, con);
@@ -42,7 +42,7 @@ namespace Datos
         public Tuple<string, string> consultaUsuarioLlenar(string usuario)
         {
             con.Open();
-            string query = "select * from UsuariosEjemplo5 where Usuario = '" + usuario + "'";
+            string query = "select * from Usuarios where Usuario = '" + usuario + "'";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reg = cmd.ExecuteReader();
 
@@ -60,7 +60,7 @@ namespace Datos
         public byte[] abrirMatrizPerfil(string usuario)
         {
             con.Open();
-            string query = "select Foto from UsuariosEjemplo5 where Usuario = '" + usuario+ "'";
+            string query = "select Foto from Usuarios where Usuario = '" + usuario+ "'";
             SqlCommand cmd = new SqlCommand(query, con);
             //SqlDataReader reg = cmd.ExecuteReader();
 
@@ -79,7 +79,7 @@ namespace Datos
 
             con.Open();
 
-            string Query = "insert into UsuariosEjemplo5 values ( '" + nom + "','" + ape + "','" + usu +
+            string Query = "insert into Usuarios values ( '" + nom + "','" + ape + "','" + usu +
                 "','" + pas + "', @foto)";
 
             SqlCommand cmd = new SqlCommand(Query, con);
@@ -92,11 +92,28 @@ namespace Datos
             return flag;
         }
 
-        //Llenado de la tabla de Productos
+        //Eliminación de Usuarios
+
+        public int eliminarUsuario(string nom)
+        {
+            int flag = 0;
+            con.Open();
+
+            string query = "delete from Usuarios where Nombre = '" +nom+ "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            flag = cmd.ExecuteNonQuery();
+            con.Close();
+
+            return flag;
+        }
+
+
+
+        //Llenado de la tabla de Usuarios
 
         public DataTable consultaTablaUsuarios()
         {
-            string query = "select Nombre, Apellido, Usuario from UsuariosEjemplo5 where ID > 1";
+            string query = "select Nombre, Apellido, Usuario from Usuarios where ID > 1";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataAdapter data = new SqlDataAdapter(cmd);
             DataTable tabla = new DataTable();
@@ -105,6 +122,7 @@ namespace Datos
             return tabla;
         }
 
+        //----------------------------------------------------------------------
 
 
         //Inserción para Productos
@@ -116,27 +134,6 @@ namespace Datos
             con.Open();
 
             string Query = "insert into Productos values ( '" + cod + "','" + nom + "','" + med + "')";
-
-            SqlCommand cmd = new SqlCommand(Query, con);
-            flag = cmd.ExecuteNonQuery();
-
-            con.Close();
-
-            return flag;
-        }
-
-        //Inserción para Clientes
-
-        public int insertarCliente(string nom, string dir, string ciu, string est, string tel,
-            string correo, string cp, string rfc)
-        {
-            int flag = 0;
-
-            con.Open();
-
-            string Query = "insert into ClientesEjemplo values ( '" + nom + "','" + dir + "','" + ciu + "'," +
-                "'" + est + "','" + cp + "','" + tel + "'," +
-                "'" + correo + "','" + rfc + "')";
 
             SqlCommand cmd = new SqlCommand(Query, con);
             flag = cmd.ExecuteNonQuery();
@@ -159,11 +156,49 @@ namespace Datos
             return tabla;
         }
 
+        //Eliminación de Productos
+
+        public int eliminarProducto(string nom)
+        {
+            int flag = 0;
+            con.Open();
+
+            string query = "delete from Productos where Nombre = '" + nom + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            flag = cmd.ExecuteNonQuery();
+            con.Close();
+
+            return flag;
+        }
+
+        //--------------------------------------------------------------------------
+
+        //Inserción para Clientes
+
+        public int insertarCliente(string nom, string dir, string ciu, string est, string tel,
+            string correo, string cp, string rfc)
+        {
+            int flag = 0;
+
+            con.Open();
+
+            string Query = "insert into Clientes values ( '" + nom + "','" + dir + "','" + ciu + "'," +
+                "'" + est + "','" + cp + "','" + tel + "'," +
+                "'" + correo + "','" + rfc + "')";
+
+            SqlCommand cmd = new SqlCommand(Query, con);
+            flag = cmd.ExecuteNonQuery();
+
+            con.Close();
+
+            return flag;
+        }
+
         //Llenado de la tabla de Clientes
 
         public DataTable consultaClientes()
         {
-            string query = "select * from ClientesEjemplo order by Nombre";
+            string query = "select * from Clientes order by Nombre";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataAdapter data = new SqlDataAdapter(cmd);
             DataTable tabla = new DataTable();
@@ -198,8 +233,8 @@ namespace Datos
             con.Close();
         }
 
-        public int insertarCotizaciones(string nom, string dir, string ciu, string est, string tel,
-            string correo, string cp, string rfc, string atiende, string fecha, string rec,
+        public int insertarCotizaciones(string nom, string dir, string ciu, string est, string cp,
+            string tel, string correo, string rfc, string atiende, string fecha, string rec,
             string sub, string iva, string total)
         {
             int flag = 0;
