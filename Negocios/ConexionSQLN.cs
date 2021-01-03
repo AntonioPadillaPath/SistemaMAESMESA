@@ -24,6 +24,11 @@ namespace Negocios
             return cn.insertarUsuario(nom, ape, usu, pas, foto);
         }
 
+        public int eliminarUsuario(string nom)
+        {
+            return cn.eliminarUsuario(nom);
+        }
+
         public byte[] abrirMatrizPerfil(string usuario)
         {
             return cn.abrirMatrizPerfil(usuario);
@@ -60,6 +65,11 @@ namespace Negocios
             return cn.insertarCliente(nom, dir, ciu, est, tel, correo, cp, rfc);
         }
 
+        public int eliminarProducto(string nom)
+        {
+            return cn.eliminarProducto(nom);
+        }
+
         public string consultaCotizaciones()
         {
             return cn.consultaCotizaciones();
@@ -75,12 +85,12 @@ namespace Negocios
             cn.cerrarCon();
         }
 
-        public int insertarCotizaciones(string nom, string dir, string ciu, string est, string tel,
-            string correo, string cp, string rfc, string atiende, string fecha, string rec,
+        public int insertarCotizaciones(string nom, string dir, string ciu, string est, string cp,
+            string tel, string correo, string rfc, string atiende, string fecha, string rec,
             string sub, string iva, string total)
         {
-            return cn.insertarCotizaciones(nom, dir, ciu, est, tel,
-            correo, cp, rfc, atiende, fecha, rec,
+            return cn.insertarCotizaciones(nom, dir, ciu, est, cp,
+            tel, correo, rfc, atiende, fecha, rec,
             sub, iva, total);
         }
 
