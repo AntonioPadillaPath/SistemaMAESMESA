@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Runtime.InteropServices;
+
 using Negocios;
 using Entidades;
 
@@ -55,6 +57,11 @@ namespace MAESMESA
 
             dgvPedido.DefaultCellStyle.Font = new Font("Century Gothic", 10);
         }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hand, int hwnd, int wmsg, int lparam);
 
         public Pedidos(string nombre, string direccion, 
             string ciudad, string estado, string tel, string email, 
@@ -469,6 +476,73 @@ namespace MAESMESA
                 MessageBox.Show("Ocurrió un ERROR. Cierra la ventana e intenta de nuevo",
                     "Error" + error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }*/
+        }
+
+        private void Pedidos_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscarProductoC_Click_1(object sender, EventArgs e)
+        {
+            cn.cerrarCon();
+
+            var resultado = cn.consultaProductosLlenar(txtBuscarProductoP.Text);
+
+            //cn.cerrarCon();
+
+            DataRow row = dt.NewRow();
+
+            if (resultado.Item1 == "Null")
+            {
+                MessageBox.Show("No existe un producto con ese Código en la Base de Datos",
+                        "¡ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (txtBuscarProductoP.Text == "")
+            {
+                MessageBox.Show("Asegúrate de insertar un código de producto",
+                        "¡ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                row["Código"] = resultado.Item1;
+                row["Concepto"] = resultado.Item2;
+
+                dt.Rows.Add(row);
+
+                txtBuscarProductoP.Text = "";
+            }
+
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void Pedidos_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Menu menu = new Menu();
+
+            menu.Show();
+            this.Close();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

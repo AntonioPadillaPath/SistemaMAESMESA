@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Usuarios));
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.pboxFoto = new System.Windows.Forms.PictureBox();
             this.btnFoto = new System.Windows.Forms.Button();
             this.txtValidar = new System.Windows.Forms.TextBox();
@@ -42,7 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.lblUsuario = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.dGVUsuarios = new System.Windows.Forms.DataGridView();
@@ -60,7 +60,8 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Gold;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
+            this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.pboxFoto);
             this.panel3.Controls.Add(this.btnFoto);
             this.panel3.Controls.Add(this.txtValidar);
@@ -73,7 +74,6 @@
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.lblUsuario);
             this.panel3.Controls.Add(this.btnEliminar);
             this.panel3.Controls.Add(this.btnAgregar);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
@@ -82,6 +82,18 @@
             this.panel3.Size = new System.Drawing.Size(296, 372);
             this.panel3.TabIndex = 13;
             this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseDown);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Helvetica LT Std Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.label7.Location = new System.Drawing.Point(33, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(86, 26);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Usuarios";
             // 
             // pboxFoto
             // 
@@ -113,71 +125,76 @@
             // 
             // txtValidar
             // 
-            this.txtValidar.BackColor = System.Drawing.Color.Gold;
+            this.txtValidar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.txtValidar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtValidar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValidar.ForeColor = System.Drawing.Color.DarkKhaki;
+            this.txtValidar.ForeColor = System.Drawing.Color.Olive;
             this.txtValidar.Location = new System.Drawing.Point(38, 168);
+            this.txtValidar.MaxLength = 50;
             this.txtValidar.Name = "txtValidar";
             this.txtValidar.Size = new System.Drawing.Size(204, 19);
             this.txtValidar.TabIndex = 27;
-            this.txtValidar.Text = "Validar Contraseña";
+            this.txtValidar.Text = "Validar Contraseña:";
             this.txtValidar.Enter += new System.EventHandler(this.txtValidar_Enter);
             this.txtValidar.Leave += new System.EventHandler(this.txtValidar_Leave);
             // 
             // txtPassword
             // 
-            this.txtPassword.BackColor = System.Drawing.Color.Gold;
+            this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPassword.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.ForeColor = System.Drawing.Color.DarkKhaki;
+            this.txtPassword.ForeColor = System.Drawing.Color.Olive;
             this.txtPassword.Location = new System.Drawing.Point(38, 140);
+            this.txtPassword.MaxLength = 50;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(204, 19);
             this.txtPassword.TabIndex = 26;
-            this.txtPassword.Text = "Contraseña";
+            this.txtPassword.Text = "Contraseña:";
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
             this.txtPassword.Leave += new System.EventHandler(this.txtPassword_Leave);
             // 
             // txtUsername
             // 
-            this.txtUsername.BackColor = System.Drawing.Color.Gold;
+            this.txtUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtUsername.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsername.ForeColor = System.Drawing.Color.DarkKhaki;
+            this.txtUsername.ForeColor = System.Drawing.Color.Olive;
             this.txtUsername.Location = new System.Drawing.Point(38, 113);
+            this.txtUsername.MaxLength = 50;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(204, 19);
             this.txtUsername.TabIndex = 25;
-            this.txtUsername.Text = "Nombre de Usuario";
+            this.txtUsername.Text = "Nombre de Usuario:";
             this.txtUsername.Enter += new System.EventHandler(this.txtUsername_Enter);
             this.txtUsername.Leave += new System.EventHandler(this.txtUsername_Leave);
             // 
             // txtApellido
             // 
-            this.txtApellido.BackColor = System.Drawing.Color.Gold;
+            this.txtApellido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.txtApellido.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtApellido.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtApellido.ForeColor = System.Drawing.Color.DarkKhaki;
+            this.txtApellido.ForeColor = System.Drawing.Color.Olive;
             this.txtApellido.Location = new System.Drawing.Point(38, 73);
+            this.txtApellido.MaxLength = 50;
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(204, 19);
             this.txtApellido.TabIndex = 24;
-            this.txtApellido.Text = "Apellido";
+            this.txtApellido.Text = "Apellido:";
             this.txtApellido.Enter += new System.EventHandler(this.txtApellido_Enter);
             this.txtApellido.Leave += new System.EventHandler(this.txtApellido_Leave);
             // 
             // txtNombre
             // 
-            this.txtNombre.BackColor = System.Drawing.Color.Gold;
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNombre.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.ForeColor = System.Drawing.Color.DarkKhaki;
+            this.txtNombre.ForeColor = System.Drawing.Color.Olive;
             this.txtNombre.Location = new System.Drawing.Point(38, 46);
+            this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(204, 19);
             this.txtNombre.TabIndex = 19;
-            this.txtNombre.Text = "Nombre";
+            this.txtNombre.Text = "Nombre:";
             this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);
             this.txtNombre.Leave += new System.EventHandler(this.txtNombre_Leave);
             this.txtNombre.MouseEnter += new System.EventHandler(this.txtNombre_MouseEnter);
@@ -186,7 +203,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Gold;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.label4.Font = new System.Drawing.Font("Helvetica LT Std", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.label4.Location = new System.Drawing.Point(35, 177);
@@ -198,7 +215,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Gold;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.label3.Font = new System.Drawing.Font("Helvetica LT Std", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.label3.Location = new System.Drawing.Point(35, 149);
@@ -210,7 +227,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Gold;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.label2.Font = new System.Drawing.Font("Helvetica LT Std", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.label2.Location = new System.Drawing.Point(35, 122);
@@ -222,7 +239,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Gold;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.label1.Font = new System.Drawing.Font("Helvetica LT Std", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.label1.Location = new System.Drawing.Point(35, 82);
@@ -234,7 +251,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Gold;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(220)))), ((int)(((byte)(40)))));
             this.label5.Font = new System.Drawing.Font("Helvetica LT Std", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.label5.Location = new System.Drawing.Point(35, 55);
@@ -242,17 +259,6 @@
             this.label5.Size = new System.Drawing.Size(217, 13);
             this.label5.TabIndex = 19;
             this.label5.Text = "___________________________________";
-            // 
-            // lblUsuario
-            // 
-            this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
-            this.lblUsuario.Location = new System.Drawing.Point(7, 12);
-            this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(282, 17);
-            this.lblUsuario.TabIndex = 18;
-            this.lblUsuario.Text = "Introduce los datos para un nuevo usuario";
             // 
             // btnEliminar
             // 
@@ -270,14 +276,15 @@
             this.btnEliminar.TabIndex = 17;
             this.btnEliminar.Text = "ELIMINAR";
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnAgregar
             // 
-            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(24)))), ((int)(((byte)(33)))));
             this.btnAgregar.FlatAppearance.BorderColor = System.Drawing.Color.AliceBlue;
             this.btnAgregar.FlatAppearance.BorderSize = 0;
-            this.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
-            this.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.CadetBlue;
+            this.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(24)))), ((int)(((byte)(33)))));
+            this.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Font = new System.Drawing.Font("Helvetica LT Std Cond", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
@@ -294,16 +301,16 @@
             this.dGVUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGVUsuarios.Location = new System.Drawing.Point(317, 66);
             this.dGVUsuarios.Name = "dGVUsuarios";
-            this.dGVUsuarios.Size = new System.Drawing.Size(421, 113);
+            this.dGVUsuarios.Size = new System.Drawing.Size(421, 121);
             this.dGVUsuarios.TabIndex = 14;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::MAESMESA.Properties.Resources.MAESMESAwhite;
-            this.pictureBox1.Location = new System.Drawing.Point(596, 331);
+            this.pictureBox1.Location = new System.Drawing.Point(553, 324);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(142, 29);
+            this.pictureBox1.Size = new System.Drawing.Size(185, 36);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
@@ -380,7 +387,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.DataGridView dGVUsuarios;
@@ -392,7 +398,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.PictureBox pboxFoto;
         private System.Windows.Forms.Button btnFoto;
         private System.Windows.Forms.TextBox txtValidar;
         private System.Windows.Forms.TextBox txtPassword;
@@ -400,5 +405,7 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.PictureBox pboxFoto;
     }
 }

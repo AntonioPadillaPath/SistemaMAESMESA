@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Runtime.InteropServices;
+
 using Negocios;
 
 namespace MAESMESA
@@ -23,6 +25,11 @@ namespace MAESMESA
             dgvSeleccionarCliente.DataSource = cn.ConsultaDTClientes();
             cn.cerrarCon();
         }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hand, int hwnd, int wmsg, int lparam);
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -46,6 +53,19 @@ namespace MAESMESA
             dato.Show();
 
             this.Hide();
+        }
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            Pedidos pedidos = new Pedidos();
+            pedidos.Show();
+            this.Close();
+        }
+
+        private void btnCancelar_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

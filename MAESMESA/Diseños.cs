@@ -13,6 +13,8 @@ using Entidades;
 using System.IO;
 using System.Diagnostics;
 
+using System.Runtime.InteropServices;
+
 namespace MAESMESA
 {
     public partial class Diseños : Form
@@ -26,7 +28,19 @@ namespace MAESMESA
             InitializeComponent();
 
             dgvDiseños.DataSource = cn.ConsultaDiseños();
+            dgvDiseños.Columns[0].Width = 40;
+            dgvDiseños.Columns[1].Width = 200;
+            dgvDiseños.Columns[2].Width = 100;
+            dgvDiseños.Columns[3].Width = 200;
+            dgvDiseños.Columns[4].Width = 170;
+
+            dgvDiseños.DefaultCellStyle.Font = new Font("Century Gothic", 10);
         }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hand, int hwnd, int wmsg, int lparam);
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -44,7 +58,9 @@ namespace MAESMESA
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (txtRuta.Text.Trim().Equals("") || txtCliente.Text.Trim().Equals("")
-                || txtCodigo.Text.Trim().Equals("") || txtProducto.Text.Trim().Equals(""))
+                || txtCodigo.Text.Trim().Equals("") || txtProducto.Text.Trim().Equals("") ||
+                txtCliente.Text.Trim().Equals("Cliente")
+                || txtCodigo.Text.Trim().Equals("Código del Producto") || txtProducto.Text.Trim().Equals("Descripción del Diseño"))
             {
                 MessageBox.Show("Todos los campos son obligatorios", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -61,7 +77,19 @@ namespace MAESMESA
             string nombreReal = openFileDialog1.SafeFileName;
 
             cn.insertarDiseños(txtCliente.Text.Trim(), txtCodigo.Text.Trim(), txtProducto.Text.Trim(), nombreReal, file);
+            cn.cerrarCon();
             dgvDiseños.DataSource = cn.ConsultaDiseños();
+            cn.cerrarCon();
+
+            txtCliente.Text = "Cliente";
+            txtCodigo.Text = "Código del Producto";
+            txtProducto.Text = "Descripción del Producto";
+            txtRuta.Text = "";
+
+            txtCliente.ForeColor = Color.FromArgb(255, 128, 128);
+            txtCodigo.ForeColor = Color.FromArgb(255, 128, 128);
+            txtProducto.ForeColor = Color.FromArgb(255, 128, 128);
+
 
             MessageBox.Show("DISEÑO de "+txtCodigo.Text.Trim()+" guardado correctamente", "DISEÑO GUARDADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -95,8 +123,8 @@ namespace MAESMESA
             cn.cerrarCon();
 
 
-            txtCliente.Text = cn.abrirMatriz(id).ToString();
-            cn.cerrarCon();
+            //txtCliente.Text = cn.abrirMatriz(id).ToString();
+            //cn.cerrarCon();
 
             
             if (!Directory.Exists(folder))
@@ -115,7 +143,89 @@ namespace MAESMESA
             cn.cerrarCon();
 
             Process.Start(fullFilePath);
+            cn.cerrarCon();
 
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void Diseños_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void txtCliente_Enter(object sender, EventArgs e)
+        {
+            if (txtCliente.Text.Trim() == "Cliente")
+            {
+                txtCliente.Text = "";
+                txtCliente.ForeColor = Color.FromArgb(7, 27, 79);
+            }
+        }
+
+        private void txtCliente_Leave(object sender, EventArgs e)
+        {
+            if (txtCliente.Text.Trim() == "")
+            {
+                txtCliente.Text = "Cliente";
+                txtCliente.ForeColor = Color.FromArgb(255, 128, 128);
+            }
+        }
+
+        private void txtCodigo_Enter(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text.Trim() == "Código del Producto")
+            {
+                txtCodigo.Text = "";
+                txtCodigo.ForeColor = Color.FromArgb(7, 27, 79);
+            }
+        }
+
+        private void txtCodigo_Leave(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text.Trim() == "")
+            {
+                txtCodigo.Text = "Código del Producto";
+                txtCodigo.ForeColor = Color.FromArgb(255, 128, 128);
+            }
+        }
+
+        private void txtProducto_Enter(object sender, EventArgs e)
+        {
+            if (txtProducto.Text.Trim() == "Descripción del Diseño")
+            {
+                txtProducto.Text = "";
+                txtProducto.ForeColor = Color.FromArgb(7, 27, 79);
+            }
+        }
+
+        private void txtProducto_Leave(object sender, EventArgs e)
+        {
+            if (txtProducto.Text.Trim() == "")
+            {
+                txtProducto.Text = "Descripción del Diseño";
+                txtProducto.ForeColor = Color.FromArgb(255, 128, 128);
+            }
         }
     }
 }

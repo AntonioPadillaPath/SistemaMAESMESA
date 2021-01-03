@@ -15,6 +15,10 @@ namespace MAESMESA
 {
     public partial class Menu : Form
     {
+        string nombre1 = "";
+        string apellido1 = "";
+        byte[] foto1;
+
         public Menu()
         {
             InitializeComponent();
@@ -26,8 +30,9 @@ namespace MAESMESA
             InitializeComponent();
             btnUsuarios.Enabled = false;
 
-            string nombre1 = nombre;
-            string apellido1 = apellido; //Para enviar los datos a todas las ventanas
+            nombre1 = nombre;
+            apellido1 = apellido; //Para enviar los datos a todas las ventanas
+            foto1 = foto;
 
             MemoryStream ms = new MemoryStream(foto);
             pboxPerfil.Image = Image.FromStream(ms);
@@ -150,7 +155,7 @@ namespace MAESMESA
 
         private void btnCotizaciones_Click(object sender, EventArgs e)
         {
-            Cotizaciones cotizaciones = new Cotizaciones();
+            Cotizaciones cotizaciones = new Cotizaciones(nombre1, apellido1, foto1);
             this.Close();
             cotizaciones.Show();
         }

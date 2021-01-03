@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Runtime.InteropServices;
+
 using Negocios;
 using Entidades;
 
@@ -19,10 +21,17 @@ namespace MAESMESA
         private DataTable dt;
         ConexionSQLN cn = new ConexionSQLN();
 
+        string nombre1 = "";
+        string apellido1 = "";
+        byte[] foto1;
 
-        public Cotizaciones()
+        public Cotizaciones(string nombre, string apellido, byte[]foto)
         {
             InitializeComponent();
+
+            nombre1 = nombre;
+            apellido1 = apellido;
+            foto1 = foto;
 
             txtNombreC.Enabled = false;
             txtNumeroC.Enabled = false;
@@ -53,14 +62,29 @@ namespace MAESMESA
 
             dgvPedido.DefaultCellStyle.Font = new Font("Century Gothic", 10);
 
+            btnBuscarProductoC.Enabled = false;
+            btnCotizacion.Enabled = false;
+            btnGuardar.Enabled = false;
+            btnSeleccionarCliente.Enabled = false;
+            btnEnviar.Enabled = false;
+
         }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hand, int hwnd, int wmsg, int lparam);
 
         //Metodo constructor para ponerle el cliente automáticamente
 
         public Cotizaciones(string nombre, string direccion, string ciudad, string estado, string postal,
-            string telefono, string rfc, string email)
+            string telefono, string email, string rfc, string nom, string ape, byte[]foto)
         {
             InitializeComponent();
+
+            nombre1 = nom;
+            apellido1 = ape;
+            foto1 = foto;
 
             txtNombreC.Enabled = true;
             txtNumeroC.Enabled = true;
@@ -72,6 +96,15 @@ namespace MAESMESA
             txtPostalC.Enabled = true;
             txtRFCC.Enabled = true;
             txtAtiendeC.Enabled = true;
+
+            txtNombreC.ForeColor = Color.Black;
+            txtDireccionC.ForeColor = Color.Black;
+            txtCiudadC.ForeColor = Color.Black;
+            txtEstadoC.ForeColor = Color.Black;
+            txtTelC.ForeColor = Color.Black;
+            txtEmailC.ForeColor = Color.Black;
+            txtPostalC.ForeColor = Color.Black;
+            txtRFCC.ForeColor = Color.Black;
 
             dt = new DataTable();
             dt.Columns.Add("Código");
@@ -130,6 +163,10 @@ namespace MAESMESA
             cn.cerrarCon();
 
             txtNumeroC.Text = parte1 + "-" + parte2;
+
+            btnBuscarProductoC.Enabled = true;
+            btnCotizacion.Enabled = true;
+            btnSeleccionarCliente.Enabled = true;
 
         }
 
@@ -197,6 +234,8 @@ namespace MAESMESA
 
             txtTotalC.Text = Convert.ToString(total);
 
+            btnGuardar.Enabled = true;
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -206,7 +245,16 @@ namespace MAESMESA
                 if (txtNombreC.Text == "" || txtNumeroC.Text == "" || txtDireccionC.Text == ""
                     || txtTelC.Text == "" || txtCiudadC.Text == "" || txtEstadoC.Text == ""
                     || txtEmailC.Text == "" || txtRFCC.Text == "" || txtAtiendeC.Text == ""
-                    || txtPostalC.Text == "")
+                    || txtPostalC.Text == "" ||
+                    txtNombreC.ForeColor == Color.SlateBlue ||
+            txtDireccionC.ForeColor == Color.SlateBlue ||
+            txtCiudadC.ForeColor == Color.SlateBlue ||
+            txtEstadoC.ForeColor == Color.SlateBlue ||
+            txtTelC.ForeColor == Color.SlateBlue ||
+            txtEmailC.ForeColor == Color.SlateBlue ||
+            txtPostalC.ForeColor == Color.SlateBlue ||
+            txtRFCC.ForeColor == Color.SlateBlue ||
+            txtAtiendeC.ForeColor == Color.SlateBlue)
                 {
                     MessageBox.Show("Asegúrate de llenar todos los campos para realizar una cotización",
                         "Error al guardar Cotización", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -222,7 +270,7 @@ namespace MAESMESA
                 cn.cerrarCon();
 
                     cn.insertarCotizaciones(txtNombreC.Text, txtDireccionC.Text, txtCiudadC.Text,
-                        txtEstadoC.Text, txtTelC.Text, txtEmailC.Text, txtPostalC.Text, txtRFCC.Text, txtAtiendeC.Text,
+                        txtEstadoC.Text, txtPostalC.Text, txtTelC.Text, txtEmailC.Text, txtRFCC.Text, txtAtiendeC.Text,
                         dateFechaC.Value.ToString(), dateRecordarC.Value.ToString(),
                         txtSubTotalC.Text, txtIVAC.Text, txtTotalC.Text);
 
@@ -268,9 +316,18 @@ namespace MAESMESA
                     guardar.Importe = row["Importe"].ToString();
 
                     listGuardar.Add(guardar);
+                    cn.cerrarCon();
                 }
 
                 cn.insertarTablaCotizacion(listGuardar);
+                cn.cerrarCon();
+
+                btnEnviar.Enabled = true;
+                btnGuardar.Enabled = false;
+                btnBuscarProductoC.Enabled = false;
+                btnSeleccionarCliente.Enabled = false;
+                btnCotizacion.Enabled = false;
+                btnNuevaCotizacion.Enabled = true;
 
 
                 //Falta para limpiar los campos de texto
@@ -297,8 +354,9 @@ namespace MAESMESA
         {
             cn.cerrarCon();
 
-            btnNuevaCotizacion.Enabled = false;
-            btnEnviar.Enabled = false;
+            btnBuscarProductoC.Enabled = true;
+            btnCotizacion.Enabled = true;
+            btnSeleccionarCliente.Enabled = true;
 
             DateTime fecha = DateTime.Today;
 
@@ -361,15 +419,28 @@ namespace MAESMESA
             txtRFCC.Enabled = true;
             txtAtiendeC.Enabled = true;
 
-            txtNombreC.Text = "";
-            txtDireccionC.Text = "";
-            txtCiudadC.Text = "";
-            txtEstadoC.Text = "";
-            txtTelC.Text = "";
-            txtEmailC.Text = "";
-            txtPostalC.Text = "";
-            txtRFCC.Text = "";
-            txtAtiendeC.Text = "";
+            txtNombreC.Text = "Nombre:";
+            txtDireccionC.Text = "Dirección:";
+            txtCiudadC.Text = "Ciudad:";
+            txtEstadoC.Text = "Estado:";
+            txtTelC.Text = "Teléfono(s):";
+            txtEmailC.Text = "e-Mail:";
+            txtPostalC.Text = "Código Postal:";
+            txtRFCC.Text = "RFC:";
+            txtAtiendeC.Text = "Atiende:";
+            txtSubTotalC.Text = "";
+            txtIVAC.Text = "";
+            txtTotalC.Text = "";
+
+            txtNombreC.ForeColor = Color.SlateBlue;
+            txtDireccionC.ForeColor = Color.SlateBlue;
+            txtCiudadC.ForeColor = Color.SlateBlue;
+            txtEstadoC.ForeColor = Color.SlateBlue;
+            txtTelC.ForeColor = Color.SlateBlue;
+            txtEmailC.ForeColor = Color.SlateBlue;
+            txtPostalC.ForeColor = Color.SlateBlue;
+            txtRFCC.ForeColor = Color.SlateBlue;
+            txtAtiendeC.ForeColor = Color.SlateBlue;
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)
@@ -382,7 +453,17 @@ namespace MAESMESA
             txtEmailC.Text == "" ||
             txtPostalC.Text == "" ||
             txtRFCC.Text == "" ||
-            txtAtiendeC.Text == "")
+            txtAtiendeC.Text == "" ||
+            txtNombreC.ForeColor == Color.SlateBlue ||
+            txtDireccionC.ForeColor == Color.SlateBlue ||
+            txtCiudadC.ForeColor == Color.SlateBlue ||
+            txtEstadoC.ForeColor == Color.SlateBlue ||
+            txtTelC.ForeColor == Color.SlateBlue ||
+            txtEmailC.ForeColor == Color.SlateBlue ||
+            txtPostalC.ForeColor == Color.SlateBlue ||
+            txtRFCC.ForeColor == Color.SlateBlue ||
+            txtAtiendeC.ForeColor == Color.SlateBlue
+            )
             {
                 MessageBox.Show("Necesitas llenar todos los campos del cliente",
                         "¡ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -442,15 +523,17 @@ namespace MAESMESA
 
                 dt.Rows.Add(row);
 
-                txtBuscarProductoC.Text = "";
+                txtBuscarProductoC.Text = "Buscar Código...";
+                txtBuscarProductoC.ForeColor = Color.SlateBlue;
             }
 
         }
 
         private void btnSeleccionarCliente_Click(object sender, EventArgs e)
         {
-            Cotizaciones_Clientes seleccionar = new Cotizaciones_Clientes();
+            Cotizaciones_Clientes seleccionar = new Cotizaciones_Clientes(nombre1, apellido1, foto1);
 
+            this.Close();
             seleccionar.Show();
         
         }
@@ -493,9 +576,204 @@ namespace MAESMESA
                 txtIVAC.Text = resultado2.Item6;
                 txtTotalC.Text = resultado2.Item7;
 
-                txtBuscarProductoC.Text = "";
+                tSTBuscarCot.Text = "";
 
                 dgvPedido.DataSource = cn.consultaCotizacionTabla("C2020-27");
+                cn.cerrarCon();
+
+                btnBuscarProductoC.Enabled = true;
+                btnSeleccionarCliente.Enabled = false;
+                btnCotizacion.Enabled = true;
+                btnGuardar.Enabled = false;
+                btnEnviar.Enabled = true;
+
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Menu menu = new Menu(nombre1, apellido1, foto1);
+            menu.Show();
+
+            this.Close();
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void Cotizaciones_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void txtNombreC_Enter(object sender, EventArgs e)
+        {
+            if(txtNombreC.Text.Trim() == "Nombre:")
+            {
+                txtNombreC.Text = "";
+                txtNombreC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtNombreC_Leave(object sender, EventArgs e)
+        {
+            if(txtNombreC.Text.Trim() == "")
+            {
+                txtNombreC.Text = "Nombre:";
+                txtNombreC.ForeColor = Color.SlateBlue;
+            }
+        }
+
+        private void txtDireccionC_Enter(object sender, EventArgs e)
+        {
+            if (txtDireccionC.Text.Trim() == "Dirección:")
+            {
+                txtDireccionC.Text = "";
+                txtDireccionC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtDireccionC_Leave(object sender, EventArgs e)
+        {
+            if (txtDireccionC.Text.Trim() == "")
+            {
+                txtDireccionC.Text = "Dirección:";
+                txtDireccionC.ForeColor = Color.SlateBlue;
+            }
+        }
+
+        private void txtPostalC_Enter(object sender, EventArgs e)
+        {
+            if (txtPostalC.Text.Trim() == "Código Postal:")
+            {
+                txtPostalC.Text = "";
+                txtPostalC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtPostalC_Leave(object sender, EventArgs e)
+        {
+            if (txtPostalC.Text.Trim() == "")
+            {
+                txtPostalC.Text = "Código Postal:";
+                txtPostalC.ForeColor = Color.SlateBlue;
+            }
+        }
+
+        private void txtCiudadC_Enter(object sender, EventArgs e)
+        {
+            if (txtCiudadC.Text.Trim() == "Ciudad:")
+            {
+                txtCiudadC.Text = "";
+                txtCiudadC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtCiudadC_Leave(object sender, EventArgs e)
+        {
+            if (txtCiudadC.Text.Trim() == "")
+            {
+                txtCiudadC.Text = "Ciudad:";
+                txtCiudadC.ForeColor = Color.SlateBlue;
+            }
+        }
+
+        private void txtEstadoC_Enter(object sender, EventArgs e)
+        {
+            if (txtEstadoC.Text.Trim() == "Estado:")
+            {
+                txtEstadoC.Text = "";
+                txtEstadoC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtEstadoC_Leave(object sender, EventArgs e)
+        {
+            if (txtEstadoC.Text.Trim() == "")
+            {
+                txtEstadoC.Text = "Estado:";
+                txtEstadoC.ForeColor = Color.SlateBlue;
+            }
+        }
+
+        private void txtTelC_Enter(object sender, EventArgs e)
+        {
+            if (txtTelC.Text.Trim() == "Teléfono(s):")
+            {
+                txtTelC.Text = "";
+                txtTelC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtTelC_Leave(object sender, EventArgs e)
+        {
+            if (txtTelC.Text.Trim() == "")
+            {
+                txtTelC.Text = "Teléfono(s):";
+                txtTelC.ForeColor = Color.SlateBlue;
+            }
+        }
+
+        private void txtEmailC_Enter(object sender, EventArgs e)
+        {
+            if (txtEmailC.Text.Trim() == "e-Mail:")
+            {
+                txtEmailC.Text = "";
+                txtEmailC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtEmailC_Leave(object sender, EventArgs e)
+        {
+            if (txtEmailC.Text.Trim() == "")
+            {
+                txtEmailC.Text = "e-Mail:";
+                txtEmailC.ForeColor = Color.SlateBlue;
+            }
+        }
+
+        private void txtRFCC_Enter(object sender, EventArgs e)
+        {
+            if (txtRFCC.Text.Trim() == "RFC:")
+            {
+                txtRFCC.Text = "";
+                txtRFCC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtRFCC_Leave(object sender, EventArgs e)
+        {
+            if (txtRFCC.Text.Trim() == "")
+            {
+                txtRFCC.Text = "RFC:";
+                txtRFCC.ForeColor = Color.SlateBlue;
+            }
+        }
+
+        private void txtAtiendeC_Enter(object sender, EventArgs e)
+        {
+            if (txtAtiendeC.Text.Trim() == "Atiende:")
+            {
+                txtAtiendeC.Text = "";
+                txtAtiendeC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtAtiendeC_Leave(object sender, EventArgs e)
+        {
+            if (txtAtiendeC.Text.Trim() == "")
+            {
+                txtAtiendeC.Text = "Atiende:";
+                txtAtiendeC.ForeColor = Color.SlateBlue;
             }
         }
     }

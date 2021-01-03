@@ -18,6 +18,7 @@ namespace MAESMESA
     public partial class Usuarios : Form
     {
         ConexionSQLN cn = new ConexionSQLN();
+            
 
         public Usuarios()
         {
@@ -29,6 +30,8 @@ namespace MAESMESA
             dGVUsuarios.Columns[2].Width = 180;
 
             dGVUsuarios.DefaultCellStyle.Font = new Font("Century Gothic", 10);
+
+            
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -60,11 +63,24 @@ namespace MAESMESA
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(txtNombre.Text =="Nombre" || txtApellido.Text == "Apellido" || txtUsername.Text == "Nombre de Usuario" || txtPassword.Text == "Contraseña"
-                || txtValidar.Text == "Validar Contraseña")
+
+            if (pboxFoto.Image == Properties.Resources.usuario)
+            {
+                pboxFoto.Tag = "usuario";
+            }
+
+
+            if (txtNombre.Text.Trim() == "Nombre:" || txtApellido.Text.Trim() == "Apellido:" || txtUsername.Text.Trim() == "Nombre de Usuario:"
+                || txtPassword.Text.Trim() == "Contraseña:" || txtValidar.Text.Trim() == "Validar Contraseña:" ||
+                txtNombre.Text.Trim() == "" || txtApellido.Text.Trim() == "" || txtUsername.Text.Trim() == ""
+                || txtPassword.Text.Trim() == "" || txtValidar.Text.Trim() == "")
             {
                 MessageBox.Show("Todos los campos son obligatorios", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+            }
+            else if (pboxFoto.Tag == "usuario")
+            {
+                MessageBox.Show("Debe seleccionar una foto", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -83,17 +99,28 @@ namespace MAESMESA
 
                     cn.insertarUsuario(txtNombre.Text.Trim(), txtApellido.Text.Trim(), txtUsername.Text.Trim(),
                         txtPassword.Text.Trim(), foto);
+                    cn.cerrarCon();
 
                     dGVUsuarios.DataSource = cn.ConsultaTablaUsuarios();
+                    cn.cerrarCon();
 
                     MessageBox.Show("Usuario agregado con éxito!", "Agregado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    txtNombre.Text = "Nombre";
-                    txtApellido.Text = "Apellido";
-                    txtUsername.Text = "Nombre de Usuario";
-                    txtPassword.Text = "Contraseña";
-                    txtValidar.Text = "Validar Contraseña";
-                    pboxFoto.Image = null;
+                    txtNombre.Text = "Nombre:";
+                    txtApellido.Text = "Apellido:";
+                    txtUsername.Text = "Nombre de Usuario:";
+                    txtPassword.Text = "Contraseña:";
+                    txtValidar.Text = "Validar Contraseña:";
+                    pboxFoto.Image = Properties.Resources.usuario;
+                    pboxFoto.Tag = "";
+
+                    txtNombre.ForeColor = Color.Olive;
+                    txtApellido.ForeColor = Color.Olive;
+                    txtUsername.ForeColor = Color.Olive;
+                    txtPassword.ForeColor = Color.Olive;
+                    txtValidar.ForeColor = Color.Olive;
+
+
                 }
             }
 
@@ -130,92 +157,109 @@ namespace MAESMESA
 
         private void txtNombre_Enter(object sender, EventArgs e)
         {
-            if (txtNombre.Text == "Nombre")
+            if (txtNombre.Text.Trim() == "Nombre:")
             {
                 txtNombre.Text = "";
-                txtNombre.ForeColor = Color.FromArgb(7, 27, 79);
+                txtNombre.ForeColor = Color.White;
             }
         }
 
         private void txtNombre_Leave(object sender, EventArgs e)
         {
-            if (txtNombre.Text == "")
+            if (txtNombre.Text.Trim() == "")
             {
-                txtNombre.Text = "Nombre";
-                txtNombre.ForeColor = Color.DarkKhaki;
+                txtNombre.Text = "Nombre:";
+                txtNombre.ForeColor = Color.Olive;
             }
         }
 
         private void txtApellido_Enter(object sender, EventArgs e)
         {
-            if (txtApellido.Text == "Apellido")
+            if (txtApellido.Text.Trim() == "Apellido:")
             {
                 txtApellido.Text = "";
-                txtApellido.ForeColor = Color.FromArgb(7, 27, 79);
+                txtApellido.ForeColor = Color.White;
             }
         }
 
         private void txtApellido_Leave(object sender, EventArgs e)
         {
-            if (txtApellido.Text == "")
+            if (txtApellido.Text.Trim() == "")
             {
-                txtApellido.Text = "Apellido";
-                txtApellido.ForeColor = Color.DarkKhaki;
+                txtApellido.Text = "Apellido:";
+                txtApellido.ForeColor = Color.Olive;
             }
         }
 
         private void txtUsername_Enter(object sender, EventArgs e)
         {
-            if (txtUsername.Text == "Nombre de Usuario")
+            if (txtUsername.Text.Trim() == "Nombre de Usuario:")
             {
                 txtUsername.Text = "";
-                txtUsername.ForeColor = Color.FromArgb(7, 27, 79);
+                txtUsername.ForeColor = Color.White;
             }
         }
 
         private void txtUsername_Leave(object sender, EventArgs e)
         {
-            if (txtUsername.Text == "")
+            if (txtUsername.Text.Trim() == "")
             {
-                txtUsername.Text = "Nombre de Usuario";
-                txtUsername.ForeColor = Color.DarkKhaki;
+                txtUsername.Text = "Nombre de Usuario:";
+                txtUsername.ForeColor = Color.Olive;
             }
         }
 
         private void txtPassword_Enter(object sender, EventArgs e)
         {
-            if (txtPassword.Text == "Contraseña")
+            if (txtPassword.Text.Trim() == "Contraseña:")
             {
                 txtPassword.Text = "";
-                txtPassword.ForeColor = Color.FromArgb(7, 27, 79);
+                txtPassword.ForeColor = Color.White;
             }
         }
 
         private void txtPassword_Leave(object sender, EventArgs e)
         {
-            if (txtPassword.Text == "")
+            if (txtPassword.Text.Trim() == "")
             {
-                txtPassword.Text = "Contraseña";
-                txtPassword.ForeColor = Color.DarkKhaki;
+                txtPassword.Text = "Contraseña:";
+                txtPassword.ForeColor = Color.Olive;
             }
         }
 
         private void txtValidar_Enter(object sender, EventArgs e)
         {
-            if (txtValidar.Text == "Validar Contraseña")
+            if (txtValidar.Text.Trim() == "Validar Contraseña:")
             {
                 txtValidar.Text = "";
-                txtValidar.ForeColor = Color.FromArgb(7, 27, 79);
+                txtValidar.ForeColor = Color.White;
             }
         }
 
         private void txtValidar_Leave(object sender, EventArgs e)
         {
-            if (txtValidar.Text == "")
+            if (txtValidar.Text.Trim() == "")
             {
-                txtValidar.Text = "Validar Contraseña";
-                txtValidar.ForeColor = Color.DarkKhaki;
+                txtValidar.Text = "Validar Contraseña:";
+                txtValidar.ForeColor = Color.Olive;
             }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("¿Está seguro que desea eliminar éste USUARIO?", "Eliminar Usuario", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                string nombre = dGVUsuarios.Rows[dGVUsuarios.CurrentRow.Index].Cells[0].Value.ToString();
+
+                cn.eliminarUsuario(nombre);
+
+                dGVUsuarios.DataSource = cn.ConsultaTablaUsuarios();
+                cn.cerrarCon();
+
+                MessageBox.Show("Eliminado",
+                        "Usuario Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
         }
     }
 }
