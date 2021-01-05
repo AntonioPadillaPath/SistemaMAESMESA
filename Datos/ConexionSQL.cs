@@ -122,6 +122,26 @@ namespace Datos
             return tabla;
         }
 
+        //Consulta para verificación de no repetir Usuario
+
+        public string noRepeatUsuario(string user)
+        {
+            con.Open();
+            string query = "select Usuario from Usuarios where Usuario = '" + user + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reg = cmd.ExecuteReader();
+
+            if (reg.Read())
+            {
+                return reg["Usuario"].ToString();
+            }
+            else
+            {
+                return "Null";
+            }
+            //con.Close();
+        }
+
         //----------------------------------------------------------------------
 
 
@@ -134,6 +154,25 @@ namespace Datos
             con.Open();
 
             string Query = "insert into Productos values ( '" + cod + "','" + nom + "','" + med + "')";
+
+            SqlCommand cmd = new SqlCommand(Query, con);
+            flag = cmd.ExecuteNonQuery();
+
+            con.Close();
+
+            return flag;
+        }
+
+
+        //Modificación de productos
+
+        public int modificarProducto(string cod, string nom, string med, string num)
+        {
+            int flag = 0;
+
+            con.Open();
+
+            string Query = "update Productos set Codigo = '" +cod+"', Nombre = '"+nom+"', Medidas = '" +med+ "' where Codigo = '"+num+"'";
 
             SqlCommand cmd = new SqlCommand(Query, con);
             flag = cmd.ExecuteNonQuery();
@@ -169,6 +208,26 @@ namespace Datos
             con.Close();
 
             return flag;
+        }
+
+        //Consulta para verificación de no repetir Producto
+
+        public string noRepeatProducto(string cod)
+        {
+            con.Open();
+            string query = "select Codigo from Productos where Codigo = '"+cod+"'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reg = cmd.ExecuteReader();
+
+            if (reg.Read())
+            {
+                return reg["Codigo"].ToString();
+            }
+            else
+            {
+                return "Null";
+            }
+            //con.Close();
         }
 
         //--------------------------------------------------------------------------
@@ -207,6 +266,45 @@ namespace Datos
             return tabla;
         }
 
+        //Modificación de Clientes
+
+        public int modificarCliente(string nom, string dir, string ciu, string est,
+            string cp, string tel, string email, string rfc)
+        {
+            int flag = 0;
+
+            con.Open();
+
+            string Query = "update Clientes set Dirección = '" + dir + "', Ciudad = '" + ciu + "', Estado = '" + est + "', CP = '" + cp + "', Teléfonos = '" + tel + "', Email = '" + email + "', RFC = '" + rfc + "' where Nombre = '" + nom + "'";
+
+            SqlCommand cmd = new SqlCommand(Query, con);
+            flag = cmd.ExecuteNonQuery();
+
+            con.Close();
+
+            return flag;
+        }
+
+        //Consulta para verificación de no repetir Nombre de Clientes
+
+        public string noRepeatCliente(string nom)
+        {
+            con.Open();
+            string query = "select Nombre from Clientes where Nombre = '" + nom + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reg = cmd.ExecuteReader();
+
+            if (reg.Read())
+            {
+                return reg["Nombre"].ToString();
+            }
+            else
+            {
+                return "Null";
+            }
+            //con.Close();
+        }
+
         //Inserción y operaciones para Cotizaciones
 
         public string consultaCotizaciones()
@@ -233,7 +331,7 @@ namespace Datos
             con.Close();
         }
 
-        public int insertarCotizaciones(string nom, string dir, string ciu, string est, string cp,
+        public int insertarCotizaciones(string num, string nom, string dir, string ciu, string est, string cp,
             string tel, string correo, string rfc, string atiende, string fecha, string rec,
             string sub, string iva, string total)
         {
@@ -241,7 +339,7 @@ namespace Datos
 
             con.Open();
 
-            string Query = "insert into CotizacionesEjemplo4 values ( '" + nom + "','" + dir + "','" + ciu + "'," +
+            string Query = "insert into CotizacionesEjemplo values ( '" +num+ "','" + nom + "','" + dir + "','" + ciu + "'," +
                 "'" + est + "','" + cp + "','" + tel + "'," +
                 "'" + correo + "','" + rfc + "','" + atiende + "'," +
                 "'" + fecha + "','" + rec + "','" + sub + "'," +
@@ -255,7 +353,7 @@ namespace Datos
             return flag;
         }
 
-        //Contulta para llenado automático de Productos en Cotización y Venta
+        //Consulta para llenado automático de Productos en Cotización y Venta
 
         public Tuple<string, string> consultaProductosLlenar(string codigo)
         {
@@ -296,12 +394,12 @@ namespace Datos
 
         }
 
-        //Contulta para llenado de la búsqueda de una cotiación (Se realizan 2 tuplas)
+        //Contulta para llenado de la búsqueda de una cotización (Se realizan 2 tuplas)
 
         public Tuple<string, string, string, string, string, string, string> consultaCotizacionLlenar1(string codigo)
         {
             con.Open();
-            string query = "select * from CotizacionesEjemplo4 where NoCot = '" + codigo + "'";
+            string query = "select * from CotizacionesEjemplo where NoCot = '" + codigo + "'";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reg = cmd.ExecuteReader();
 
@@ -325,7 +423,7 @@ namespace Datos
         public Tuple<string, string, string, string, string, string, string> consultaCotizacionLlenar2(string codigo)
         {
             con.Open();
-            string query = "select * from CotizacionesEjemplo4 where NoCot = '" + codigo + "'";
+            string query = "select * from CotizacionesEjemplo where NoCot = '" + codigo + "'";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reg = cmd.ExecuteReader();
 
@@ -521,7 +619,7 @@ namespace Datos
             con.Open();
 
             //string Query = "insert into Diseños1 values ( '" + cli + "','" + cod + "','" + pro + "'," + doc + ")";
-            string Query = "insert into DiseñosEjemplo values ( '" + cli + "','" + cod + "','" + pro +
+            string Query = "insert into Diseños values ( '" + cli + "','" + cod + "','" + pro +
               "', '" + nom + "', @archivo)";
 
             SqlCommand cmd = new SqlCommand(Query, con);
@@ -540,7 +638,7 @@ namespace Datos
 
         public DataTable consultaDiseños()
         {
-            string query = "select id, Cliente, Codigo, Producto, Archivo from DiseñosEjemplo order by Cliente";
+            string query = "select id, Cliente, Codigo, Producto, Archivo from Diseños order by Cliente";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataAdapter data = new SqlDataAdapter(cmd);
             DataTable tabla = new DataTable();
@@ -553,7 +651,7 @@ namespace Datos
         public string abrirDiseño(int id)
         {
             con.Open();
-            string query = "select Archivo from DiseñosEjemplo where id = " + id;
+            string query = "select Archivo from Diseños where id = " + id;
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reg = cmd.ExecuteReader();
 
@@ -572,7 +670,7 @@ namespace Datos
         public byte[] abrirMatriz(int id)
         {
             con.Open();
-            string query = "select Documento from DiseñosEjemplo where id = " + id;
+            string query = "select Documento from Diseños where id = " + id;
             SqlCommand cmd = new SqlCommand(query, con);
             //SqlDataReader reg = cmd.ExecuteReader();
 
