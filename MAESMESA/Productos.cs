@@ -22,6 +22,7 @@ namespace MAESMESA
         {
             InitializeComponent();
             dgvProductos.DataSource = cn.ConsultaDT();
+            cn.cerrarCon();
             dgvProductos.Columns[0].Width = 100;
             dgvProductos.Columns[1].Width = 350;
             dgvProductos.Columns[2].Width = 150;
@@ -46,17 +47,26 @@ namespace MAESMESA
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (txtCodigo.Text.Trim() == "" || txtNombre.Text.Trim() == "" || txtMedidas.Text.Trim() == "" ||
-                    txtCodigo.ForeColor == Color.MediumPurple || txtNombre.ForeColor == Color.MediumPurple 
-                    || txtMedidas.ForeColor == Color.MediumPurple)
+            //try
+            //{
+                if(cn.noRepeatProducto(txtCodigo.Text.Trim()) != "Null")
                 {
+                    cn.cerrarCon();
+
+                    MessageBox.Show("El código de Producto ya existe en la Base de Datos",
+                        "Error al agregar nuevo Producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (txtCodigo.Text.Trim() == "" || txtNombre.Text.Trim() == "" || txtMedidas.Text.Trim() == "" ||
+                    txtCodigo.Text.Trim() == "Código:" || txtNombre.Text.Trim() == "Nombre:" || txtMedidas.Text.Trim() == "Medidas:")
+                {
+                    cn.cerrarCon();
                     MessageBox.Show("Asegúrate de llenar todos los campos para agregar el nuevo producto",
                         "Error al agregar nuevo Producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
+                    cn.cerrarCon();
+
                     MessageBox.Show("¡El producto se ha agregado con Éxito!",
                         "Nuevo Producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -72,12 +82,12 @@ namespace MAESMESA
                     txtNombre.ForeColor = Color.MediumPurple;
                     txtMedidas.ForeColor = Color.MediumPurple;
                 }
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show("Asegúrate que el nuevo código a ingresar no se repita",
-                    "Error al agregar nuevo Producto" +error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //}
+            //catch (Exception error)
+            //{
+            //    MessageBox.Show("Asegúrate que el nuevo código a ingresar no se repita",
+            //        "Error al agregar nuevo Producto" +error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -180,13 +190,58 @@ namespace MAESMESA
                 string nombre = dgvProductos.Rows[dgvProductos.CurrentRow.Index].Cells[1].Value.ToString();
 
                 cn.eliminarProducto(nombre);
+                cn.cerrarCon();
 
                 dgvProductos.DataSource = cn.ConsultaDT();
                 cn.cerrarCon();
 
-                MessageBox.Show("Eliminado",
-                        "Producto Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Producto Eliminado",
+                        "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void dgvProductos_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            int filaActual = dgvProductos.CurrentRow.Index;
+
+            txtNombre.Text = dgvProductos.Rows[filaActual].Cells[1].Value.ToString();
+            txtCodigo.Text = dgvProductos.Rows[filaActual].Cells[0].Value.ToString();
+            txtMedidas.Text = dgvProductos.Rows[filaActual].Cells[2].Value.ToString();
+
+            txtNombre.ForeColor = Color.White;
+            txtCodigo.ForeColor = Color.White;
+            txtMedidas.ForeColor = Color.White;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                string num = dgvProductos.Rows[dgvProductos.CurrentRow.Index].Cells[0].Value.ToString();
+
+                cn.modificarProducto(txtCodigo.Text.Trim(), txtNombre.Text.Trim(), txtMedidas.Text.Trim(), num);
+                cn.cerrarCon();
+
+                dgvProductos.DataSource = cn.ConsultaDT();
+                cn.cerrarCon();
+
+                txtCodigo.Text = "Código:";
+                txtNombre.Text = "Nombre:";
+                txtMedidas.Text = "Medidas:";
+
+                txtCodigo.ForeColor = Color.MediumPurple;
+                txtNombre.ForeColor = Color.MediumPurple;
+                txtMedidas.ForeColor = Color.MediumPurple;
+
+                MessageBox.Show("Información de Producto actualizada",
+                            "Actualización de Producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Asegúrate que el nuevo código a ingresar no se repita",
+                    "Error al agregar nuevo Producto" + error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
     }
 }

@@ -81,6 +81,7 @@
             this.txtAtiendeC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAtiendeC.ForeColor = System.Drawing.Color.SlateGray;
             this.txtAtiendeC.Location = new System.Drawing.Point(528, 173);
+            this.txtAtiendeC.MaxLength = 100;
             this.txtAtiendeC.Name = "txtAtiendeC";
             this.txtAtiendeC.Size = new System.Drawing.Size(210, 23);
             this.txtAtiendeC.TabIndex = 23;
@@ -114,6 +115,7 @@
             this.txtRFCC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRFCC.ForeColor = System.Drawing.Color.SlateGray;
             this.txtRFCC.Location = new System.Drawing.Point(357, 173);
+            this.txtRFCC.MaxLength = 13;
             this.txtRFCC.Name = "txtRFCC";
             this.txtRFCC.Size = new System.Drawing.Size(165, 23);
             this.txtRFCC.TabIndex = 17;
@@ -126,6 +128,7 @@
             this.txtEmailC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmailC.ForeColor = System.Drawing.Color.SlateGray;
             this.txtEmailC.Location = new System.Drawing.Point(13, 173);
+            this.txtEmailC.MaxLength = 100;
             this.txtEmailC.Name = "txtEmailC";
             this.txtEmailC.Size = new System.Drawing.Size(337, 23);
             this.txtEmailC.TabIndex = 15;
@@ -138,6 +141,7 @@
             this.txtTelC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelC.ForeColor = System.Drawing.Color.SlateGray;
             this.txtTelC.Location = new System.Drawing.Point(528, 144);
+            this.txtTelC.MaxLength = 200;
             this.txtTelC.Name = "txtTelC";
             this.txtTelC.Size = new System.Drawing.Size(210, 23);
             this.txtTelC.TabIndex = 13;
@@ -150,6 +154,7 @@
             this.txtPostalC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPostalC.ForeColor = System.Drawing.Color.SlateGray;
             this.txtPostalC.Location = new System.Drawing.Point(13, 144);
+            this.txtPostalC.MaxLength = 5;
             this.txtPostalC.Name = "txtPostalC";
             this.txtPostalC.Size = new System.Drawing.Size(165, 23);
             this.txtPostalC.TabIndex = 11;
@@ -162,6 +167,7 @@
             this.txtEstadoC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEstadoC.ForeColor = System.Drawing.Color.SlateGray;
             this.txtEstadoC.Location = new System.Drawing.Point(357, 144);
+            this.txtEstadoC.MaxLength = 50;
             this.txtEstadoC.Name = "txtEstadoC";
             this.txtEstadoC.Size = new System.Drawing.Size(165, 23);
             this.txtEstadoC.TabIndex = 9;
@@ -174,6 +180,7 @@
             this.txtCiudadC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCiudadC.ForeColor = System.Drawing.Color.SlateGray;
             this.txtCiudadC.Location = new System.Drawing.Point(185, 144);
+            this.txtCiudadC.MaxLength = 50;
             this.txtCiudadC.Name = "txtCiudadC";
             this.txtCiudadC.Size = new System.Drawing.Size(165, 23);
             this.txtCiudadC.TabIndex = 7;
@@ -186,6 +193,7 @@
             this.txtDireccionC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDireccionC.ForeColor = System.Drawing.Color.SlateGray;
             this.txtDireccionC.Location = new System.Drawing.Point(13, 115);
+            this.txtDireccionC.MaxLength = 200;
             this.txtDireccionC.Name = "txtDireccionC";
             this.txtDireccionC.Size = new System.Drawing.Size(725, 23);
             this.txtDireccionC.TabIndex = 5;
@@ -209,6 +217,7 @@
             this.txtNombreC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombreC.ForeColor = System.Drawing.Color.SlateGray;
             this.txtNombreC.Location = new System.Drawing.Point(13, 87);
+            this.txtNombreC.MaxLength = 100;
             this.txtNombreC.Name = "txtNombreC";
             this.txtNombreC.Size = new System.Drawing.Size(512, 23);
             this.txtNombreC.TabIndex = 1;
@@ -288,6 +297,8 @@
             // 
             this.btnSeleccionarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnSeleccionarCliente.FlatAppearance.BorderSize = 0;
+            this.btnSeleccionarCliente.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnSeleccionarCliente.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnSeleccionarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSeleccionarCliente.Font = new System.Drawing.Font("Helvetica LT Std Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeleccionarCliente.ForeColor = System.Drawing.Color.Cyan;
@@ -303,6 +314,8 @@
             // 
             this.btnNuevaCotizacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnNuevaCotizacion.FlatAppearance.BorderSize = 0;
+            this.btnNuevaCotizacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnNuevaCotizacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnNuevaCotizacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevaCotizacion.Font = new System.Drawing.Font("Helvetica LT Std Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNuevaCotizacion.ForeColor = System.Drawing.Color.White;
@@ -397,6 +410,8 @@
             // 
             this.btnBuscarProductoC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnBuscarProductoC.FlatAppearance.BorderSize = 0;
+            this.btnBuscarProductoC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnBuscarProductoC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnBuscarProductoC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscarProductoC.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscarProductoC.ForeColor = System.Drawing.Color.White;
@@ -450,7 +465,19 @@
             "JAR-0001",
             "LLAA-02",
             "LLAS-01",
-            "LLP-0001"});
+            "LLP-0001",
+            "BAT-002",
+            "JAR-KIT",
+            "JAR-SET",
+            "FIL-001TE",
+            "FIL-001NE",
+            "FIL-004TE",
+            "FIL-004NE",
+            "FIL-019TE",
+            "FIL-019NE",
+            "FIL-200TE",
+            "FIL-200NE",
+            "PLL-001E"});
             this.txtBuscarProductoC.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.txtBuscarProductoC.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtBuscarProductoC.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -460,11 +487,15 @@
             this.txtBuscarProductoC.Size = new System.Drawing.Size(165, 23);
             this.txtBuscarProductoC.TabIndex = 44;
             this.txtBuscarProductoC.Text = "Buscar Código...";
+            this.txtBuscarProductoC.Enter += new System.EventHandler(this.txtBuscarProductoC_Enter);
+            this.txtBuscarProductoC.Leave += new System.EventHandler(this.txtBuscarProductoC_Leave);
             // 
             // btnCotizacion
             // 
             this.btnCotizacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnCotizacion.FlatAppearance.BorderSize = 0;
+            this.btnCotizacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnCotizacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnCotizacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCotizacion.Font = new System.Drawing.Font("Helvetica LT Std Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCotizacion.ForeColor = System.Drawing.Color.Yellow;
@@ -552,6 +583,8 @@
             // 
             this.btnEnviar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnEnviar.FlatAppearance.BorderSize = 0;
+            this.btnEnviar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnEnviar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnEnviar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEnviar.Font = new System.Drawing.Font("Helvetica LT Std Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnviar.ForeColor = System.Drawing.Color.Yellow;
@@ -567,6 +600,8 @@
             // 
             this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnGuardar.FlatAppearance.BorderSize = 0;
+            this.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.Font = new System.Drawing.Font("Helvetica LT Std Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.ForeColor = System.Drawing.Color.Lime;

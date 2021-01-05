@@ -132,7 +132,7 @@
             this.txtValidar.Location = new System.Drawing.Point(38, 168);
             this.txtValidar.MaxLength = 50;
             this.txtValidar.Name = "txtValidar";
-            this.txtValidar.Size = new System.Drawing.Size(204, 19);
+            this.txtValidar.Size = new System.Drawing.Size(214, 19);
             this.txtValidar.TabIndex = 27;
             this.txtValidar.Text = "Validar Contraseña:";
             this.txtValidar.Enter += new System.EventHandler(this.txtValidar_Enter);
@@ -147,7 +147,7 @@
             this.txtPassword.Location = new System.Drawing.Point(38, 140);
             this.txtPassword.MaxLength = 50;
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(204, 19);
+            this.txtPassword.Size = new System.Drawing.Size(214, 19);
             this.txtPassword.TabIndex = 26;
             this.txtPassword.Text = "Contraseña:";
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
@@ -162,7 +162,7 @@
             this.txtUsername.Location = new System.Drawing.Point(38, 113);
             this.txtUsername.MaxLength = 50;
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(204, 19);
+            this.txtUsername.Size = new System.Drawing.Size(214, 19);
             this.txtUsername.TabIndex = 25;
             this.txtUsername.Text = "Nombre de Usuario:";
             this.txtUsername.Enter += new System.EventHandler(this.txtUsername_Enter);
@@ -177,7 +177,7 @@
             this.txtApellido.Location = new System.Drawing.Point(38, 73);
             this.txtApellido.MaxLength = 50;
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(204, 19);
+            this.txtApellido.Size = new System.Drawing.Size(214, 19);
             this.txtApellido.TabIndex = 24;
             this.txtApellido.Text = "Apellido:";
             this.txtApellido.Enter += new System.EventHandler(this.txtApellido_Enter);
@@ -192,7 +192,7 @@
             this.txtNombre.Location = new System.Drawing.Point(38, 46);
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(204, 19);
+            this.txtNombre.Size = new System.Drawing.Size(214, 19);
             this.txtNombre.TabIndex = 19;
             this.txtNombre.Text = "Nombre:";
             this.txtNombre.Enter += new System.EventHandler(this.txtNombre_Enter);

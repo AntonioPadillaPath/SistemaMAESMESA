@@ -78,7 +78,7 @@ namespace MAESMESA
         //Metodo constructor para ponerle el cliente automáticamente
 
         public Cotizaciones(string nombre, string direccion, string ciudad, string estado, string postal,
-            string telefono, string email, string rfc, string nom, string ape, byte[]foto)
+            string telefono, string rfc, string email, string nom, string ape, byte[]foto)
         {
             InitializeComponent();
 
@@ -245,16 +245,11 @@ namespace MAESMESA
                 if (txtNombreC.Text == "" || txtNumeroC.Text == "" || txtDireccionC.Text == ""
                     || txtTelC.Text == "" || txtCiudadC.Text == "" || txtEstadoC.Text == ""
                     || txtEmailC.Text == "" || txtRFCC.Text == "" || txtAtiendeC.Text == ""
-                    || txtPostalC.Text == "" ||
-                    txtNombreC.ForeColor == Color.SlateBlue ||
-            txtDireccionC.ForeColor == Color.SlateBlue ||
-            txtCiudadC.ForeColor == Color.SlateBlue ||
-            txtEstadoC.ForeColor == Color.SlateBlue ||
-            txtTelC.ForeColor == Color.SlateBlue ||
-            txtEmailC.ForeColor == Color.SlateBlue ||
-            txtPostalC.ForeColor == Color.SlateBlue ||
-            txtRFCC.ForeColor == Color.SlateBlue ||
-            txtAtiendeC.ForeColor == Color.SlateBlue)
+                    || txtPostalC.Text == "" || txtAtiendeC.Text == "Atiende:" ||
+                    txtNombreC.Text == "Nombre:" || txtDireccionC.Text == "Dirección:"
+                    || txtTelC.Text == "Teléfono(s):" || txtCiudadC.Text == "Ciudad:" || txtEstadoC.Text == "Estado:"
+                    || txtEmailC.Text == "e-Mail:" || txtRFCC.Text == "RFC:" || txtPostalC.Text == "Código Postal:"
+                    )
                 {
                     MessageBox.Show("Asegúrate de llenar todos los campos para realizar una cotización",
                         "Error al guardar Cotización", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -269,10 +264,19 @@ namespace MAESMESA
 
                 cn.cerrarCon();
 
-                    cn.insertarCotizaciones(txtNombreC.Text, txtDireccionC.Text, txtCiudadC.Text,
+                DateTime fechaActual = dateFechaC.Value;
+                DateTime fechaRecordar = dateRecordarC.Value;
+
+                string fechaHoy = fechaActual.Day.ToString() + "/" +fechaActual.Month.ToString() + "/" +fechaActual.Year.ToString();
+                string fechaRecuerdo = fechaRecordar.Day.ToString() + "/" + fechaRecordar.Month.ToString() + "/" + fechaRecordar.Year.ToString();
+
+                cn.insertarCotizaciones(txtNumeroC.Text, txtNombreC.Text, txtDireccionC.Text, txtCiudadC.Text,
                         txtEstadoC.Text, txtPostalC.Text, txtTelC.Text, txtEmailC.Text, txtRFCC.Text, txtAtiendeC.Text,
-                        dateFechaC.Value.ToString(), dateRecordarC.Value.ToString(),
+                        //dateFechaC.Value.ToString(), dateRecordarC.Value.ToString(),
+                        fechaHoy, fechaRecuerdo,
                         txtSubTotalC.Text, txtIVAC.Text, txtTotalC.Text);
+
+                cn.cerrarCon();
 
                 MessageBox.Show("La Cotización se ha guardado con éxito",
                         "¡LISTO!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -445,24 +449,12 @@ namespace MAESMESA
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {
-            if(txtNombreC.Text == "" ||
-            txtDireccionC.Text == "" ||
-            txtCiudadC.Text == "" ||
-            txtEstadoC.Text == "" ||
-            txtTelC.Text == "" ||
-            txtEmailC.Text == "" ||
-            txtPostalC.Text == "" ||
-            txtRFCC.Text == "" ||
-            txtAtiendeC.Text == "" ||
-            txtNombreC.ForeColor == Color.SlateBlue ||
-            txtDireccionC.ForeColor == Color.SlateBlue ||
-            txtCiudadC.ForeColor == Color.SlateBlue ||
-            txtEstadoC.ForeColor == Color.SlateBlue ||
-            txtTelC.ForeColor == Color.SlateBlue ||
-            txtEmailC.ForeColor == Color.SlateBlue ||
-            txtPostalC.ForeColor == Color.SlateBlue ||
-            txtRFCC.ForeColor == Color.SlateBlue ||
-            txtAtiendeC.ForeColor == Color.SlateBlue
+            if(txtNombreC.Text == "" || txtDireccionC.Text == "" || txtCiudadC.Text == "" ||
+            txtEstadoC.Text == "" || txtTelC.Text == "" || txtEmailC.Text == "" ||
+            txtPostalC.Text == "" || txtRFCC.Text == "" || txtAtiendeC.Text == "" ||
+            txtAtiendeC.Text == "Atiende:" || txtNombreC.Text == "Nombre:" || txtDireccionC.Text == "Dirección:"
+            || txtTelC.Text == "Teléfono(s):" || txtCiudadC.Text == "Ciudad:" || txtEstadoC.Text == "Estado:"
+            || txtEmailC.Text == "e-Mail:" || txtRFCC.Text == "RFC:" || txtPostalC.Text == "Código Postal:"
             )
             {
                 MessageBox.Show("Necesitas llenar todos los campos del cliente",
@@ -480,16 +472,12 @@ namespace MAESMESA
                 string rfc = txtRFCC.Text;
                 string atiende = txtAtiendeC.Text;
                 string numero = txtNumeroC.Text;
-                /*string col0 = this.dgvPedido.CurrentRow.Cells[0].Value.ToString();
-                string col1 = this.dgvPedido.CurrentRow.Cells[1].Value.ToString();
-                string col2 = this.dgvPedido.CurrentRow.Cells[2].Value.ToString();
-                string col3 = this.dgvPedido.CurrentRow.Cells[3].Value.ToString();
-                string col4 = this.dgvPedido.CurrentRow.Cells[4].Value.ToString();*/
-                
 
                 Pedidos pedidos = new Pedidos(nombre, direccion, ciudad, estado, tel, email, postal, 
-                    rfc, atiende, numero/*, col0, col1, col2, col3, col4*/);
+                    rfc, atiende, numero, nombre1, apellido1, foto1);
                 pedidos.Show();
+
+                this.Close();
             }
 
             
@@ -526,6 +514,8 @@ namespace MAESMESA
                 txtBuscarProductoC.Text = "Buscar Código...";
                 txtBuscarProductoC.ForeColor = Color.SlateBlue;
             }
+
+            cn.cerrarCon();
 
         }
 
@@ -576,10 +566,12 @@ namespace MAESMESA
                 txtIVAC.Text = resultado2.Item6;
                 txtTotalC.Text = resultado2.Item7;
 
-                tSTBuscarCot.Text = "";
 
-                dgvPedido.DataSource = cn.consultaCotizacionTabla("C2020-27");
+                dgvPedido.DataSource = cn.consultaCotizacionTabla(tSTBuscarCot.Text.Trim());
                 cn.cerrarCon();
+
+
+                tSTBuscarCot.Text = "";
 
                 btnBuscarProductoC.Enabled = true;
                 btnSeleccionarCliente.Enabled = false;
@@ -774,6 +766,24 @@ namespace MAESMESA
             {
                 txtAtiendeC.Text = "Atiende:";
                 txtAtiendeC.ForeColor = Color.SlateBlue;
+            }
+        }
+
+        private void txtBuscarProductoC_Enter(object sender, EventArgs e)
+        {
+            if (txtBuscarProductoC.Text.Trim() == "Buscar Código...")
+            {
+                txtBuscarProductoC.Text = "";
+                txtBuscarProductoC.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtBuscarProductoC_Leave(object sender, EventArgs e)
+        {
+            if (txtBuscarProductoC.Text.Trim() == "")
+            {
+                txtBuscarProductoC.Text = "Buscar Código...";
+                txtBuscarProductoC.ForeColor = Color.SlateBlue;
             }
         }
     }

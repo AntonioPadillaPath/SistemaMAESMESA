@@ -59,8 +59,8 @@ namespace MAESMESA
         {
             if (txtRuta.Text.Trim().Equals("") || txtCliente.Text.Trim().Equals("")
                 || txtCodigo.Text.Trim().Equals("") || txtProducto.Text.Trim().Equals("") ||
-                txtCliente.Text.Trim().Equals("Cliente")
-                || txtCodigo.Text.Trim().Equals("Código del Producto") || txtProducto.Text.Trim().Equals("Descripción del Diseño"))
+                txtCliente.Text.Trim().Equals("Cliente:")
+                || txtCodigo.Text.Trim().Equals("Código del Producto:") || txtProducto.Text.Trim().Equals("Descripción del Diseño:"))
             {
                 MessageBox.Show("Todos los campos son obligatorios", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -81,9 +81,9 @@ namespace MAESMESA
             dgvDiseños.DataSource = cn.ConsultaDiseños();
             cn.cerrarCon();
 
-            txtCliente.Text = "Cliente";
-            txtCodigo.Text = "Código del Producto";
-            txtProducto.Text = "Descripción del Producto";
+            txtCliente.Text = "Cliente:";
+            txtCodigo.Text = "Código del Producto:";
+            txtProducto.Text = "Descripción del Diseño:";
             txtRuta.Text = "";
 
             txtCliente.ForeColor = Color.FromArgb(255, 128, 128);
@@ -115,6 +115,9 @@ namespace MAESMESA
 
         private void btnAbrir_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Espere un momento, el diseño se abrirá en la aplicación respectiva. El proceso puede durar unos segundos",
+                        "Abriendo el diseño...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             int id = int.Parse(dgvDiseños.Rows[dgvDiseños.CurrentRow.Index].Cells[0].Value.ToString());
 
             string path = AppDomain.CurrentDomain.BaseDirectory;
@@ -176,7 +179,7 @@ namespace MAESMESA
 
         private void txtCliente_Enter(object sender, EventArgs e)
         {
-            if (txtCliente.Text.Trim() == "Cliente")
+            if (txtCliente.Text.Trim() == "Cliente:")
             {
                 txtCliente.Text = "";
                 txtCliente.ForeColor = Color.FromArgb(7, 27, 79);
@@ -187,14 +190,14 @@ namespace MAESMESA
         {
             if (txtCliente.Text.Trim() == "")
             {
-                txtCliente.Text = "Cliente";
+                txtCliente.Text = "Cliente:";
                 txtCliente.ForeColor = Color.FromArgb(255, 128, 128);
             }
         }
 
         private void txtCodigo_Enter(object sender, EventArgs e)
         {
-            if (txtCodigo.Text.Trim() == "Código del Producto")
+            if (txtCodigo.Text.Trim() == "Código del Producto:")
             {
                 txtCodigo.Text = "";
                 txtCodigo.ForeColor = Color.FromArgb(7, 27, 79);
@@ -205,14 +208,14 @@ namespace MAESMESA
         {
             if (txtCodigo.Text.Trim() == "")
             {
-                txtCodigo.Text = "Código del Producto";
+                txtCodigo.Text = "Código del Producto:";
                 txtCodigo.ForeColor = Color.FromArgb(255, 128, 128);
             }
         }
 
         private void txtProducto_Enter(object sender, EventArgs e)
         {
-            if (txtProducto.Text.Trim() == "Descripción del Diseño")
+            if (txtProducto.Text.Trim() == "Descripción del Diseño:")
             {
                 txtProducto.Text = "";
                 txtProducto.ForeColor = Color.FromArgb(7, 27, 79);
@@ -223,7 +226,7 @@ namespace MAESMESA
         {
             if (txtProducto.Text.Trim() == "")
             {
-                txtProducto.Text = "Descripción del Diseño";
+                txtProducto.Text = "Descripción del Diseño:";
                 txtProducto.ForeColor = Color.FromArgb(255, 128, 128);
             }
         }

@@ -25,6 +25,7 @@ namespace MAESMESA
             InitializeComponent();
 
             dGVUsuarios.DataSource = cn.ConsultaTablaUsuarios();
+            cn.cerrarCon();
             dGVUsuarios.Columns[0].Width = 100;
             dGVUsuarios.Columns[1].Width = 100;
             dGVUsuarios.Columns[2].Width = 180;
@@ -69,8 +70,14 @@ namespace MAESMESA
                 pboxFoto.Tag = "usuario";
             }
 
+            if (cn.noRepeatUsuario(txtUsername.Text.Trim()) != "Null")
+            {
+                cn.cerrarCon();
 
-            if (txtNombre.Text.Trim() == "Nombre:" || txtApellido.Text.Trim() == "Apellido:" || txtUsername.Text.Trim() == "Nombre de Usuario:"
+                MessageBox.Show("El Nombre de Usuario ya existe en la Base de Datos y no puede repetirse",
+                    "Error al agregar nuevo Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (txtNombre.Text.Trim() == "Nombre:" || txtApellido.Text.Trim() == "Apellido:" || txtUsername.Text.Trim() == "Nombre de Usuario:"
                 || txtPassword.Text.Trim() == "Contraseña:" || txtValidar.Text.Trim() == "Validar Contraseña:" ||
                 txtNombre.Text.Trim() == "" || txtApellido.Text.Trim() == "" || txtUsername.Text.Trim() == ""
                 || txtPassword.Text.Trim() == "" || txtValidar.Text.Trim() == "")
@@ -95,6 +102,7 @@ namespace MAESMESA
                     {
                         pboxFoto.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                         foto = ms.ToArray();
+                        cn.cerrarCon();
                     }
 
                     cn.insertarUsuario(txtNombre.Text.Trim(), txtApellido.Text.Trim(), txtUsername.Text.Trim(),
@@ -252,12 +260,13 @@ namespace MAESMESA
                 string nombre = dGVUsuarios.Rows[dGVUsuarios.CurrentRow.Index].Cells[0].Value.ToString();
 
                 cn.eliminarUsuario(nombre);
+                cn.cerrarCon();
 
                 dGVUsuarios.DataSource = cn.ConsultaTablaUsuarios();
                 cn.cerrarCon();
 
-                MessageBox.Show("Eliminado",
-                        "Usuario Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Usuario Eliminado",
+                        "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
         }

@@ -18,9 +18,17 @@ namespace MAESMESA
     {
         ConexionSQLN cn = new ConexionSQLN();
 
-        public Pedidos_Clientes()
+        string nombre1 = "";
+        string apellido1 = "";
+        byte[] foto1;
+
+        public Pedidos_Clientes(string nombre, string apellido, byte[] foto)
         {
             InitializeComponent();
+
+            nombre1 = nombre;
+            apellido1 = apellido;
+            foto1 = foto;
 
             dgvSeleccionarCliente.DataSource = cn.ConsultaDTClientes();
             cn.cerrarCon();
@@ -33,6 +41,8 @@ namespace MAESMESA
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            Pedidos pedidos = new Pedidos(nombre1, apellido1, foto1);
+            pedidos.Show();
             this.Close();
         }
 
@@ -47,22 +57,28 @@ namespace MAESMESA
             string postal = this.dgvSeleccionarCliente.CurrentRow.Cells[4].Value.ToString();
             string rfc = this.dgvSeleccionarCliente.CurrentRow.Cells[7].Value.ToString();
 
-            Pedidos dato = new Pedidos(nombre, direccion, ciudad, estado, telefono, email,
-                postal, rfc);
+            Pedidos dato = new Pedidos(nombre, direccion, ciudad, estado, postal, telefono,
+                rfc, email, nombre1, apellido1, foto1);
 
             dato.Show();
 
-            this.Hide();
+            this.Close();
         }
 
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
-            Pedidos pedidos = new Pedidos();
-            pedidos.Show();
-            this.Close();
+            //Pedidos pedidos = new Pedidos();
+            //pedidos.Show();
+            //this.Close();
         }
 
         private void btnCancelar_MouseDown(object sender, MouseEventArgs e)
+        {
+            //ReleaseCapture();
+            //SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void Pedidos_Clientes_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);

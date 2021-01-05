@@ -131,6 +131,8 @@
             // 
             this.btnSeleccionarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnSeleccionarCliente.FlatAppearance.BorderSize = 0;
+            this.btnSeleccionarCliente.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnSeleccionarCliente.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnSeleccionarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSeleccionarCliente.Font = new System.Drawing.Font("Helvetica LT Std Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeleccionarCliente.ForeColor = System.Drawing.Color.Cyan;
@@ -158,6 +160,8 @@
             // 
             this.btnNuevoPedido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnNuevoPedido.FlatAppearance.BorderSize = 0;
+            this.btnNuevoPedido.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnNuevoPedido.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnNuevoPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNuevoPedido.Font = new System.Drawing.Font("Helvetica LT Std Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNuevoPedido.ForeColor = System.Drawing.Color.White;
@@ -193,6 +197,8 @@
             this.txtComentariosP.Size = new System.Drawing.Size(724, 54);
             this.txtComentariosP.TabIndex = 29;
             this.txtComentariosP.Text = "Comentarios:";
+            this.txtComentariosP.Enter += new System.EventHandler(this.txtComentariosP_Enter);
+            this.txtComentariosP.Leave += new System.EventHandler(this.txtComentariosP_Leave);
             // 
             // txtEntregaP
             // 
@@ -200,11 +206,14 @@
             this.txtEntregaP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEntregaP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtEntregaP.Location = new System.Drawing.Point(440, 233);
+            this.txtEntregaP.MaxLength = 200;
             this.txtEntregaP.Name = "txtEntregaP";
             this.txtEntregaP.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtEntregaP.Size = new System.Drawing.Size(298, 23);
             this.txtEntregaP.TabIndex = 27;
             this.txtEntregaP.Text = "Dirección de Entrega:";
+            this.txtEntregaP.Enter += new System.EventHandler(this.txtEntregaP_Enter);
+            this.txtEntregaP.Leave += new System.EventHandler(this.txtEntregaP_Leave);
             // 
             // label14
             // 
@@ -222,10 +231,13 @@
             this.txtFPagoP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFPagoP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtFPagoP.Location = new System.Drawing.Point(114, 233);
+            this.txtFPagoP.MaxLength = 50;
             this.txtFPagoP.Name = "txtFPagoP";
             this.txtFPagoP.Size = new System.Drawing.Size(154, 23);
             this.txtFPagoP.TabIndex = 25;
             this.txtFPagoP.Text = "Forma de Pago:";
+            this.txtFPagoP.Enter += new System.EventHandler(this.txtFPagoP_Enter);
+            this.txtFPagoP.Leave += new System.EventHandler(this.txtFPagoP_Leave);
             // 
             // label13
             // 
@@ -244,10 +256,13 @@
             this.txtAtiendeP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAtiendeP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtAtiendeP.Location = new System.Drawing.Point(527, 173);
+            this.txtAtiendeP.MaxLength = 100;
             this.txtAtiendeP.Name = "txtAtiendeP";
             this.txtAtiendeP.Size = new System.Drawing.Size(211, 23);
             this.txtAtiendeP.TabIndex = 23;
             this.txtAtiendeP.Text = "Atiende:";
+            this.txtAtiendeP.Enter += new System.EventHandler(this.txtAtiendeP_Enter);
+            this.txtAtiendeP.Leave += new System.EventHandler(this.txtAtiendeP_Leave);
             // 
             // txtOCompraP
             // 
@@ -255,10 +270,13 @@
             this.txtOCompraP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOCompraP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtOCompraP.Location = new System.Drawing.Point(555, 204);
+            this.txtOCompraP.MaxLength = 50;
             this.txtOCompraP.Name = "txtOCompraP";
             this.txtOCompraP.Size = new System.Drawing.Size(183, 23);
             this.txtOCompraP.TabIndex = 21;
             this.txtOCompraP.Text = "Órden de Compra:";
+            this.txtOCompraP.Enter += new System.EventHandler(this.txtOCompraP_Enter);
+            this.txtOCompraP.Leave += new System.EventHandler(this.txtOCompraP_Leave);
             // 
             // label11
             // 
@@ -298,10 +316,13 @@
             this.txtRFCP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRFCP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtRFCP.Location = new System.Drawing.Point(356, 173);
+            this.txtRFCP.MaxLength = 13;
             this.txtRFCP.Name = "txtRFCP";
             this.txtRFCP.Size = new System.Drawing.Size(165, 23);
             this.txtRFCP.TabIndex = 17;
             this.txtRFCP.Text = "RFC:";
+            this.txtRFCP.Enter += new System.EventHandler(this.txtRFCP_Enter);
+            this.txtRFCP.Leave += new System.EventHandler(this.txtRFCP_Leave);
             // 
             // txtEmailP
             // 
@@ -309,10 +330,13 @@
             this.txtEmailP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmailP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtEmailP.Location = new System.Drawing.Point(14, 173);
+            this.txtEmailP.MaxLength = 100;
             this.txtEmailP.Name = "txtEmailP";
             this.txtEmailP.Size = new System.Drawing.Size(336, 23);
             this.txtEmailP.TabIndex = 15;
             this.txtEmailP.Text = "e-Mail:";
+            this.txtEmailP.Enter += new System.EventHandler(this.txtEmailP_Enter);
+            this.txtEmailP.Leave += new System.EventHandler(this.txtEmailP_Leave);
             // 
             // txtTelP
             // 
@@ -320,10 +344,13 @@
             this.txtTelP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtTelP.Location = new System.Drawing.Point(527, 144);
+            this.txtTelP.MaxLength = 200;
             this.txtTelP.Name = "txtTelP";
             this.txtTelP.Size = new System.Drawing.Size(211, 23);
             this.txtTelP.TabIndex = 13;
             this.txtTelP.Text = "Teléfono(s):";
+            this.txtTelP.Enter += new System.EventHandler(this.txtTelP_Enter);
+            this.txtTelP.Leave += new System.EventHandler(this.txtTelP_Leave);
             // 
             // txtPostalP
             // 
@@ -331,10 +358,13 @@
             this.txtPostalP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPostalP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtPostalP.Location = new System.Drawing.Point(14, 144);
+            this.txtPostalP.MaxLength = 5;
             this.txtPostalP.Name = "txtPostalP";
             this.txtPostalP.Size = new System.Drawing.Size(165, 23);
             this.txtPostalP.TabIndex = 11;
             this.txtPostalP.Text = "Código Postal:";
+            this.txtPostalP.Enter += new System.EventHandler(this.txtPostalP_Enter);
+            this.txtPostalP.Leave += new System.EventHandler(this.txtPostalP_Leave);
             // 
             // txtEstadoP
             // 
@@ -342,11 +372,14 @@
             this.txtEstadoP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEstadoP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtEstadoP.Location = new System.Drawing.Point(356, 144);
+            this.txtEstadoP.MaxLength = 50;
             this.txtEstadoP.Name = "txtEstadoP";
             this.txtEstadoP.Size = new System.Drawing.Size(165, 23);
             this.txtEstadoP.TabIndex = 9;
             this.txtEstadoP.Text = "Estado:";
             this.txtEstadoP.TextChanged += new System.EventHandler(this.txtEstadoP_TextChanged);
+            this.txtEstadoP.Enter += new System.EventHandler(this.txtEstadoP_Enter);
+            this.txtEstadoP.Leave += new System.EventHandler(this.txtEstadoP_Leave);
             // 
             // txtCiudadP
             // 
@@ -354,10 +387,13 @@
             this.txtCiudadP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCiudadP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtCiudadP.Location = new System.Drawing.Point(185, 144);
+            this.txtCiudadP.MaxLength = 50;
             this.txtCiudadP.Name = "txtCiudadP";
             this.txtCiudadP.Size = new System.Drawing.Size(165, 23);
             this.txtCiudadP.TabIndex = 7;
             this.txtCiudadP.Text = "Ciudad:";
+            this.txtCiudadP.Enter += new System.EventHandler(this.txtCiudadP_Enter);
+            this.txtCiudadP.Leave += new System.EventHandler(this.txtCiudadP_Leave);
             // 
             // txtDireccionP
             // 
@@ -365,10 +401,13 @@
             this.txtDireccionP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDireccionP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtDireccionP.Location = new System.Drawing.Point(13, 115);
+            this.txtDireccionP.MaxLength = 200;
             this.txtDireccionP.Name = "txtDireccionP";
             this.txtDireccionP.Size = new System.Drawing.Size(725, 23);
             this.txtDireccionP.TabIndex = 5;
             this.txtDireccionP.Text = "Dirección:";
+            this.txtDireccionP.Enter += new System.EventHandler(this.txtDireccionP_Enter);
+            this.txtDireccionP.Leave += new System.EventHandler(this.txtDireccionP_Leave);
             // 
             // txtNumeroP
             // 
@@ -399,10 +438,13 @@
             this.txtNombreP.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombreP.ForeColor = System.Drawing.Color.SlateGray;
             this.txtNombreP.Location = new System.Drawing.Point(13, 86);
+            this.txtNombreP.MaxLength = 100;
             this.txtNombreP.Name = "txtNombreP";
             this.txtNombreP.Size = new System.Drawing.Size(512, 23);
             this.txtNombreP.TabIndex = 1;
             this.txtNombreP.Text = "Nombre:";
+            this.txtNombreP.Enter += new System.EventHandler(this.txtNombreP_Enter);
+            this.txtNombreP.Leave += new System.EventHandler(this.txtNombreP_Leave);
             // 
             // menuStrip1
             // 
@@ -411,7 +453,7 @@
             this.buscarPedidoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(112, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(232, 25);
             this.menuStrip1.TabIndex = 62;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -440,11 +482,14 @@
             this.buscarToolStripMenuItem.Name = "buscarToolStripMenuItem";
             this.buscarToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.buscarToolStripMenuItem.Text = "Buscar";
+            this.buscarToolStripMenuItem.Click += new System.EventHandler(this.buscarToolStripMenuItem_Click);
             // 
             // btnGuardarPedido
             // 
             this.btnGuardarPedido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnGuardarPedido.FlatAppearance.BorderSize = 0;
+            this.btnGuardarPedido.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnGuardarPedido.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnGuardarPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarPedido.Font = new System.Drawing.Font("Helvetica LT Std Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardarPedido.ForeColor = System.Drawing.Color.Lime;
@@ -460,6 +505,8 @@
             // 
             this.btnPedido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnPedido.FlatAppearance.BorderSize = 0;
+            this.btnPedido.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnPedido.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPedido.Font = new System.Drawing.Font("Helvetica LT Std Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPedido.ForeColor = System.Drawing.Color.Yellow;
@@ -484,6 +531,8 @@
             // 
             this.btnBuscarProductoC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnBuscarProductoC.FlatAppearance.BorderSize = 0;
+            this.btnBuscarProductoC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnBuscarProductoC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnBuscarProductoC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscarProductoC.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscarProductoC.ForeColor = System.Drawing.Color.White;
@@ -537,7 +586,19 @@
             "JAR-0001",
             "LLAA-02",
             "LLAS-01",
-            "LLP-0001"});
+            "LLP-0001",
+            "BAT-002",
+            "JAR-KIT",
+            "JAR-SET",
+            "FIL-001TE",
+            "FIL-001NE",
+            "FIL-004TE",
+            "FIL-004NE",
+            "FIL-019TE",
+            "FIL-019NE",
+            "FIL-200TE",
+            "FIL-200NE",
+            "PLL-001E"});
             this.txtBuscarProductoP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.txtBuscarProductoP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtBuscarProductoP.BackColor = System.Drawing.Color.White;
@@ -547,7 +608,9 @@
             this.txtBuscarProductoP.Name = "txtBuscarProductoP";
             this.txtBuscarProductoP.Size = new System.Drawing.Size(165, 23);
             this.txtBuscarProductoP.TabIndex = 61;
-            this.txtBuscarProductoP.Text = "Buscar Código:";
+            this.txtBuscarProductoP.Text = "Buscar Código...";
+            this.txtBuscarProductoP.Enter += new System.EventHandler(this.txtBuscarProductoP_Enter);
+            this.txtBuscarProductoP.Leave += new System.EventHandler(this.txtBuscarProductoP_Leave);
             // 
             // label17
             // 

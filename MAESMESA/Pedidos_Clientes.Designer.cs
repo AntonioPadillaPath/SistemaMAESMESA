@@ -48,7 +48,7 @@
             this.btnCancelar.TabIndex = 46;
             this.btnCancelar.Text = "CANCELAR";
             this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             this.btnCancelar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnCancelar_MouseDown);
             // 
             // btnSeleccionar
@@ -64,6 +64,7 @@
             this.btnSeleccionar.TabIndex = 45;
             this.btnSeleccionar.Text = "SELECCIONAR CLIENTE";
             this.btnSeleccionar.UseVisualStyleBackColor = false;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // dgvSeleccionarCliente
             // 
@@ -88,7 +89,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Pedidos_Clientes";
             this.Opacity = 0.95D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pedidos_Clientes";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pedidos_Clientes_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeleccionarCliente)).EndInit();
             this.ResumeLayout(false);
 

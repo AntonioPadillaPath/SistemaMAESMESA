@@ -162,7 +162,7 @@ namespace MAESMESA
 
         private void btnPedidos_Click(object sender, EventArgs e)
         {
-            Pedidos pedidos = new Pedidos();
+            Pedidos pedidos = new Pedidos(nombre1, apellido1, foto1);
             this.Close();
             pedidos.Show();
         }

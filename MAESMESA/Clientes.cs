@@ -23,6 +23,7 @@ namespace MAESMESA
             InitializeComponent();
 
             dgvClientes.DataSource = cn.ConsultaDTClientes();
+            cn.cerrarCon();
             dgvClientes.Columns[0].Width = 170;
             dgvClientes.Columns[1].Width = 230;
             dgvClientes.Columns[2].Width = 100;
@@ -44,48 +45,57 @@ namespace MAESMESA
         {
             /*try
             {*/
+
             if (txtNombre.Text == "" || txtDireccion.Text == "" || txtPostal.Text == ""
                 || txtTel.Text == "" || txtCiudad.Text == "" || txtEstado.Text == ""
-                || txtEmail.Text == "" || txtRFC.Text == "" || txtNombre.ForeColor == Color.LightSeaGreen
-                || txtDireccion.ForeColor == Color.LightSeaGreen || txtTel.ForeColor == Color.LightSeaGreen
-                || txtCiudad.ForeColor == Color.LightSeaGreen || txtEstado.ForeColor == Color.LightSeaGreen
-                || txtEmail.ForeColor == Color.LightSeaGreen || txtPostal.ForeColor == Color.LightSeaGreen
-                || txtRFC.ForeColor == Color.LightSeaGreen)
+                || txtEmail.Text == "" || txtRFC.Text == "" ||
+                txtNombre.Text == "Nombre:" || txtDireccion.Text == "Dirección:" || txtPostal.Text == "Código Postal:"
+                || txtTel.Text == "Teléfono(s):" || txtCiudad.Text == "Ciudad:" || txtEstado.Text == "Estado:"
+                || txtEmail.Text == "e-Mail:" || txtRFC.Text == "RFC:")
             {
                 MessageBox.Show("Asegúrate de llenar todos los campos para poder guardar un nuevo cliente",
                     "Error al guardar Cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
+                if (cn.noRepeatCliente(txtNombre.Text.Trim()) != "Null")
+                {
+                    cn.cerrarCon();
 
-                cn.insertarCliente(txtNombre.Text, txtDireccion.Text, txtCiudad.Text,
+                    if (MessageBox.Show("El Nombre del Cliente ya existe en la Base de Datos. ¿Desea agregar de todas maneras?", "Agregar Cliente", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        cn.insertarCliente(txtNombre.Text, txtDireccion.Text, txtCiudad.Text,
                     txtEstado.Text, txtTel.Text, txtEmail.Text, txtPostal.Text, txtRFC.Text);
-                cn.cerrarCon();
+                        cn.cerrarCon();
+
+
+                        MessageBox.Show("Se ha guardado con éxito",
+                                "¡LISTO!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        dgvClientes.DataSource = cn.ConsultaDTClientes();
+                        cn.cerrarCon();
+
+                        txtNombre.Text = "Nombre:";
+                        txtDireccion.Text = "Dirección:";
+                        txtCiudad.Text = "Ciudad:";
+                        txtEstado.Text = "Estado:";
+                        txtTel.Text = "Teléfono(s):";
+                        txtEmail.Text = "e-Mail:";
+                        txtPostal.Text = "Código Postal:";
+                        txtRFC.Text = "RFC:";
+
+                        txtNombre.ForeColor = Color.LightSeaGreen;
+                        txtDireccion.ForeColor = Color.LightSeaGreen;
+                        txtCiudad.ForeColor = Color.LightSeaGreen;
+                        txtEstado.ForeColor = Color.LightSeaGreen;
+                        txtTel.ForeColor = Color.LightSeaGreen;
+                        txtEmail.ForeColor = Color.LightSeaGreen;
+                        txtPostal.ForeColor = Color.LightSeaGreen;
+                        txtRFC.ForeColor = Color.LightSeaGreen;
+                    }
+                }
+
                 
-
-                MessageBox.Show("Se ha guardado con éxito",
-                        "¡LISTO!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                dgvClientes.DataSource = cn.ConsultaDTClientes();
-                cn.cerrarCon();
-
-                txtNombre.Text = "Nombre:";
-                txtDireccion.Text = "Dirección:";
-                txtCiudad.Text = "Ciudad:";
-                txtEstado.Text = "Estado:";
-                txtTel.Text = "Teléfono(s):";
-                txtEmail.Text = "e-Mail:";
-                txtPostal.Text = "Código Postal:";
-                txtRFC.Text = "RFC:";
-
-                txtNombre.ForeColor = Color.LightSeaGreen;
-                txtDireccion.ForeColor = Color.LightSeaGreen;
-                txtCiudad.ForeColor = Color.LightSeaGreen;
-                txtEstado.ForeColor = Color.LightSeaGreen;
-                txtTel.ForeColor = Color.LightSeaGreen;
-                txtEmail.ForeColor = Color.LightSeaGreen;
-                txtPostal.ForeColor = Color.LightSeaGreen;
-                txtRFC.ForeColor = Color.LightSeaGreen;
 
 
                 //Falta para limpiar los campos de texto
@@ -272,6 +282,89 @@ namespace MAESMESA
                 txtRFC.Text = "RFC:";
                 txtRFC.ForeColor = Color.LightSeaGreen;
             }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("Se modificarán los datos del Cliente seleccionado excepto el NOMBRE; esto para la " +
+                "protección de los datos en Cotizaciones y Pedidos. ¿DESEA MODIFICAR LOS DATOS?", "Modificación de Información del Cliente", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                string nom = dgvClientes.Rows[dgvClientes.CurrentRow.Index].Cells[0].Value.ToString();
+
+                cn.modificarCliente(nom, txtDireccion.Text.Trim(), txtCiudad.Text.Trim(), txtEstado.Text.Trim(),
+                    txtPostal.Text.Trim(), txtTel.Text.Trim(), txtEmail.Text.Trim(), txtRFC.Text.Trim());
+                cn.cerrarCon();
+
+                dgvClientes.DataSource = cn.ConsultaDTClientes();
+                cn.cerrarCon();
+
+                txtNombre.Text = "Código:";
+                txtDireccion.Text = "Dirección:";
+                txtCiudad.Text = "Ciudad:";
+                txtEstado.Text = "Estado:";
+                txtPostal.Text = "Código Postal:";
+                txtTel.Text = "Teléfono(s):";
+                txtEmail.Text = "e-Mail:";
+                txtRFC.Text = "RFC:";
+
+                txtNombre.ForeColor = Color.LightSeaGreen;
+                txtDireccion.ForeColor = Color.LightSeaGreen;
+                txtCiudad.ForeColor = Color.LightSeaGreen;
+                txtEstado.ForeColor = Color.LightSeaGreen;
+                txtPostal.ForeColor = Color.LightSeaGreen;
+                txtTel.ForeColor = Color.LightSeaGreen;
+                txtEmail.ForeColor = Color.LightSeaGreen;
+                txtRFC.ForeColor = Color.LightSeaGreen;
+
+                MessageBox.Show("Información de Cliente actualizada",
+                            "Actualización de Cliente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                txtNombre.Text = "Código:";
+                txtDireccion.Text = "Dirección:";
+                txtCiudad.Text = "Ciudad:";
+                txtEstado.Text = "Estado:";
+                txtPostal.Text = "Código Postal:";
+                txtTel.Text = "Teléfono(s):";
+                txtEmail.Text = "e-Mail:";
+                txtRFC.Text = "RFC:";
+
+                txtNombre.ForeColor = Color.LightSeaGreen;
+                txtDireccion.ForeColor = Color.LightSeaGreen;
+                txtCiudad.ForeColor = Color.LightSeaGreen;
+                txtEstado.ForeColor = Color.LightSeaGreen;
+                txtPostal.ForeColor = Color.LightSeaGreen;
+                txtTel.ForeColor = Color.LightSeaGreen;
+                txtEmail.ForeColor = Color.LightSeaGreen;
+                txtRFC.ForeColor = Color.LightSeaGreen;
+            }
+
+
+        }
+
+        private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int filaActual = dgvClientes.CurrentRow.Index;
+
+            txtNombre.Text = dgvClientes.Rows[filaActual].Cells[0].Value.ToString();
+            txtDireccion.Text = dgvClientes.Rows[filaActual].Cells[1].Value.ToString();
+            txtCiudad.Text = dgvClientes.Rows[filaActual].Cells[2].Value.ToString();
+            txtEstado.Text = dgvClientes.Rows[filaActual].Cells[3].Value.ToString();
+            txtPostal.Text = dgvClientes.Rows[filaActual].Cells[4].Value.ToString();
+            txtTel.Text = dgvClientes.Rows[filaActual].Cells[5].Value.ToString();
+            txtEmail.Text = dgvClientes.Rows[filaActual].Cells[6].Value.ToString();
+            txtRFC.Text = dgvClientes.Rows[filaActual].Cells[7].Value.ToString();
+
+            txtNombre.ForeColor = Color.White;
+            txtDireccion.ForeColor = Color.White;
+            txtCiudad.ForeColor = Color.White;
+            txtEstado.ForeColor = Color.White;
+            txtPostal.ForeColor = Color.White;
+            txtEmail.ForeColor = Color.White;
+            txtTel.ForeColor = Color.White;
+            txtRFC.ForeColor = Color.White;
         }
     }
 }

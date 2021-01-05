@@ -78,7 +78,7 @@
             this.txtMedidas.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMedidas.ForeColor = System.Drawing.Color.MediumPurple;
             this.txtMedidas.Location = new System.Drawing.Point(29, 62);
-            this.txtMedidas.MaxLength = 50;
+            this.txtMedidas.MaxLength = 30;
             this.txtMedidas.Name = "txtMedidas";
             this.txtMedidas.Size = new System.Drawing.Size(243, 19);
             this.txtMedidas.TabIndex = 24;
@@ -105,9 +105,9 @@
             this.txtCodigo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigo.ForeColor = System.Drawing.Color.MediumPurple;
             this.txtCodigo.Location = new System.Drawing.Point(29, 35);
-            this.txtCodigo.MaxLength = 80;
+            this.txtCodigo.MaxLength = 20;
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(191, 19);
+            this.txtCodigo.Size = new System.Drawing.Size(243, 19);
             this.txtCodigo.TabIndex = 22;
             this.txtCodigo.Text = "Código:";
             this.txtCodigo.Enter += new System.EventHandler(this.txtCodigo_Enter);
@@ -120,7 +120,7 @@
             this.txtNombre.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.MediumPurple;
             this.txtNombre.Location = new System.Drawing.Point(29, 8);
-            this.txtNombre.MaxLength = 20;
+            this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(388, 19);
             this.txtNombre.TabIndex = 23;
@@ -182,6 +182,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "MODIFICAR";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // btnAgregar
             // 
@@ -209,6 +210,7 @@
             this.dgvProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvProductos.Size = new System.Drawing.Size(625, 190);
             this.dgvProductos.TabIndex = 2;
+            this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellClick_1);
             // 
             // pictureBox3
             // 

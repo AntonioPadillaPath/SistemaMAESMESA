@@ -89,10 +89,11 @@
             this.txtProducto.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProducto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.txtProducto.Location = new System.Drawing.Point(23, 102);
+            this.txtProducto.MaxLength = 300;
             this.txtProducto.Name = "txtProducto";
             this.txtProducto.Size = new System.Drawing.Size(244, 19);
             this.txtProducto.TabIndex = 24;
-            this.txtProducto.Text = "Descripción del Diseño";
+            this.txtProducto.Text = "Descripción del Diseño:";
             this.txtProducto.Enter += new System.EventHandler(this.txtProducto_Enter);
             this.txtProducto.Leave += new System.EventHandler(this.txtProducto_Leave);
             // 
@@ -103,10 +104,11 @@
             this.txtCodigo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.txtCodigo.Location = new System.Drawing.Point(23, 75);
+            this.txtCodigo.MaxLength = 20;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(244, 19);
             this.txtCodigo.TabIndex = 26;
-            this.txtCodigo.Text = "Código del Producto";
+            this.txtCodigo.Text = "Código del Producto:";
             this.txtCodigo.Enter += new System.EventHandler(this.txtCodigo_Enter);
             this.txtCodigo.Leave += new System.EventHandler(this.txtCodigo_Leave);
             // 
@@ -117,10 +119,11 @@
             this.txtCliente.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCliente.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.txtCliente.Location = new System.Drawing.Point(23, 48);
+            this.txtCliente.MaxLength = 200;
             this.txtCliente.Name = "txtCliente";
             this.txtCliente.Size = new System.Drawing.Size(244, 19);
             this.txtCliente.TabIndex = 25;
-            this.txtCliente.Text = "Cliente";
+            this.txtCliente.Text = "Cliente:";
             this.txtCliente.Enter += new System.EventHandler(this.txtCliente_Enter);
             this.txtCliente.Leave += new System.EventHandler(this.txtCliente_Leave);
             // 
@@ -128,6 +131,8 @@
             // 
             this.btnAbrir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
             this.btnAbrir.FlatAppearance.BorderSize = 0;
+            this.btnAbrir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
+            this.btnAbrir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.btnAbrir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbrir.Font = new System.Drawing.Font("Helvetica LT Std Cond", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbrir.ForeColor = System.Drawing.Color.White;
@@ -141,8 +146,10 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnGuardar.BackColor = System.Drawing.Color.Silver;
             this.btnGuardar.FlatAppearance.BorderSize = 0;
+            this.btnGuardar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.Font = new System.Drawing.Font("Helvetica LT Std Cond", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(27)))), ((int)(((byte)(79)))));
