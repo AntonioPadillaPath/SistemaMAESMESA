@@ -49,6 +49,11 @@ namespace Negocios
             return cn.consultaTablaUsuarios();
         }
 
+        public string noRepeatUsuario(string user)
+        {
+            return cn.noRepeatUsuario(user);
+        }
+
         public DataTable ConsultaDTClientes()
         {
             return cn.consultaClientes();
@@ -59,10 +64,31 @@ namespace Negocios
             return cn.insertarProducto(cod, nom, med);
         }
 
+        public int modificarProducto(string cod, string nom, string med, string num)
+        {
+            return cn.modificarProducto(cod, nom, med, num);
+        }
+
+        public string noRepeatProducto(string cod)
+        {
+            return cn.noRepeatProducto(cod);
+        }
+
         public int insertarCliente(string nom, string dir, string ciu, string est, string tel,
             string correo, string cp, string rfc)
         {
             return cn.insertarCliente(nom, dir, ciu, est, tel, correo, cp, rfc);
+        }
+
+        public int modificarCliente(string nom, string dir, string ciu, string est,
+            string cp, string tel, string email, string rfc)
+        {
+            return cn.modificarCliente(nom, dir, ciu, est, cp, tel, email, rfc);
+        }
+
+        public string noRepeatCliente(string nom)
+        {
+            return cn.noRepeatCliente(nom);
         }
 
         public int eliminarProducto(string nom)
@@ -85,11 +111,11 @@ namespace Negocios
             cn.cerrarCon();
         }
 
-        public int insertarCotizaciones(string nom, string dir, string ciu, string est, string cp,
+        public int insertarCotizaciones(string num, string nom, string dir, string ciu, string est, string cp,
             string tel, string correo, string rfc, string atiende, string fecha, string rec,
             string sub, string iva, string total)
         {
-            return cn.insertarCotizaciones(nom, dir, ciu, est, cp,
+            return cn.insertarCotizaciones(num, nom, dir, ciu, est, cp,
             tel, correo, rfc, atiende, fecha, rec,
             sub, iva, total);
         }
