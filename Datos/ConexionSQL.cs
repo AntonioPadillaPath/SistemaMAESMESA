@@ -394,6 +394,22 @@ namespace Datos
 
         }
 
+        //Eliminación de la tabla de Cotizaciones para sustituir
+
+        public int borrarDeTablaCotizaciones(string num)
+        {
+            int flag = 0;
+            con.Open();
+
+            string query = "delete from cotizacionesProductosEjemplo where NoCot = '" + num + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            flag = cmd.ExecuteNonQuery();
+            con.Close();
+
+            return flag;
+        }
+
+
         //Contulta para llenado de la búsqueda de una cotización (Se realizan 2 tuplas)
 
         public Tuple<string, string, string, string, string, string, string> consultaCotizacionLlenar1(string codigo)
@@ -547,6 +563,92 @@ namespace Datos
             //con.Close();
         }
 
+        //Contulta para llenado de la búsqueda de una Pedidos (Se realizan 3 tuplas)
+
+        public Tuple<string, string, string, string, string, string, string> consultaPedidoLlenar1(string codigo)
+        {
+            con.Open();
+            string query = "select * from PedidosEjemplo10 where NoCot = '" + codigo + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reg = cmd.ExecuteReader();
+
+            if (reg.Read())
+            {
+                return Tuple.Create
+                    (
+                    reg["NoCot"].ToString(), reg["Nombre"].ToString(),
+                    reg["Dirección"].ToString(), reg["CP"].ToString(),
+                    reg["Ciudad"].ToString(), reg["Estado"].ToString(),
+                    reg["Teléfono"].ToString()
+                    );
+            }
+            else
+            {
+                return Tuple.Create("Null", "", "", "", "", "", "");
+            }
+            //con.Close();
+        }
+
+        public Tuple<string, string, string, string, string, string, string> consultaPedidoLlenar2(string codigo)
+        {
+            con.Open();
+            string query = "select * from PedidosEjemplo10 where NoCot = '" + codigo + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reg = cmd.ExecuteReader();
+
+            if (reg.Read())
+            {
+                return Tuple.Create
+                    (
+                    reg["Email"].ToString(),
+                    reg["RFC"].ToString(), reg["Atiende"].ToString(),
+                    reg["Fecha"].ToString(), reg["Entrega"].ToString(),
+                    reg["Método"].ToString(), reg["Forma"].ToString()
+                    );
+            }
+            else
+            {
+                return Tuple.Create("Null", "", "", "", "", "", "");
+            }
+            //con.Close();
+        }
+
+        public Tuple<string, string, string, string, string, string> consultaPedidoLlenar3(string codigo)
+        {
+            con.Open();
+            string query = "select * from PedidosEjemplo10 where NoCot = '" + codigo + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reg = cmd.ExecuteReader();
+
+            if (reg.Read())
+            {
+                return Tuple.Create
+                    (
+                    reg["Órden"].ToString(), reg["CFDI"].ToString(),
+                    reg["Comentarios"].ToString(), reg["Subtotal"].ToString(),
+                    reg["IVA"].ToString(), reg["Total"].ToString());
+            }
+            else
+            {
+                return Tuple.Create("Null", "", "", "", "", "");
+            }
+            //con.Close();
+        }
+
+        //Llenado de la tabla de Pedido por NoCot
+
+        public DataTable consultaPedidoTabla(string nocot)
+        {
+            string query = "select Codigo, Concepto, PU, Cantidad, Importe " +
+                "from pedidosProductosEjemplo10 where NoCot = '" + nocot + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable tabla = new DataTable();
+            data.Fill(tabla);
+
+            return tabla;
+        }
+
         public int updateIndexPed(int index)
         {
             int flag = 0;
@@ -565,19 +667,18 @@ namespace Datos
 
 
         //Inserción de Datos de Pedido
-        public int insertarPedidos(string nom, string dir, string ciu, string est, string tel,
-            string correo, string cp, string rfc, string atiende, string fecha, string sub, string iva, string total,
-            string orden, string pago, string entrega, string com)
+        public int insertarPedidos(string num, string nom, string dir, string cp, string ciu, string est, string tel,
+            string correo, string rfc, string atiende, string fecha, string date, string ent, string met, string form, 
+            string ord, string cfdi, string com, string sub, string iva, string tot)
         {
             int flag = 0;
 
             con.Open();
 
-            string Query = "insert into PedidosEjemplo values ( '" + nom + "','" + dir + "','" + ciu + "'," +
-                "'" + est + "','" + cp + "','" + tel + "'," +
-                "'" + correo + "','" + rfc + "','" + atiende + "'," +
-                "'" + fecha + "','" + sub + "'," +
-                "'" + iva + "','" + total + "','" + orden + "','" + pago + "','" + entrega + "','" + com + "')";
+            string Query = "insert into PedidosEjemplo10 values ( '" + num + "','" + nom + "','" + dir + "'," +
+                "'" + cp + "','" + ciu + "','" + est + "'," +
+                "'" + tel + "','" + correo + "','" + rfc + "','" +atiende+ "', '" +fecha+ "','"+date+ "', '" +ent+ "', '" +met+
+                "','" + form + "','" + ord + "','" + cfdi + "','" + com + "','" + sub + "','" + iva + "', '" +tot+"')";
 
             SqlCommand cmd = new SqlCommand(Query, con);
             flag = cmd.ExecuteNonQuery();
@@ -595,10 +696,10 @@ namespace Datos
 
             foreach (Guardar guardar in F)
             {
-                string query = "insert into pedidosProductosEjemplo " +
-                    "(NoCot, Cliente, Codigo, Concepto, PU, Cantidad, Importe) values('" + guardar.Nocot + "','"
+                string query = "insert into pedidosProductosEjemplo10 " +
+                    "(NoCot, Cliente, Codigo, Concepto, PU, Cantidad, Importe, Fecha) values('" + guardar.Nocot + "','"
                     + guardar.Cliente + "','" + guardar.Codigo + "','" + guardar.Concepto + "','" + guardar.Precio + "','"
-                    + guardar.Cantidad + "','" + guardar.Importe + "')";
+                    + guardar.Cantidad + "','" + guardar.Importe + "','" +guardar.Fecha+"')";
 
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.ExecuteNonQuery();
@@ -606,6 +707,27 @@ namespace Datos
 
             con.Close();
 
+        }
+
+        //Verificación de que no se repita Órden de Compra
+
+        public string noRepeatOrdenCompra(string ord)
+        {
+            con.Close();
+            con.Open();
+            string query = "select Órden from PedidosEjemplo10 where Órden = '" + ord + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reg = cmd.ExecuteReader();
+
+            if (reg.Read())
+            {
+                return reg["Órden"].ToString();
+            }
+            else
+            {
+                return "Null";
+            }
+            //con.Close();
         }
 
 
@@ -699,7 +821,182 @@ namespace Datos
 
         }
 
+        //------------------------------------------------------------------
 
+        //Inserción de Datos de Notificaciones
+        public int insertarNotificaciones(string num, string nom, string fec, string ati, string tel)
+        {
+            int flag = 0;
+
+            con.Open();
+
+            string Query = "insert into Notificaciones1 values ( '" + num + "','" + nom + "','" + fec + "'," +
+                "'" + ati + "','" + tel + "')";
+
+            SqlCommand cmd = new SqlCommand(Query, con);
+            flag = cmd.ExecuteNonQuery();
+
+            con.Close();
+
+            return flag;
+        }
+
+
+        //Métodos para consultar años e índices
+
+        public string consultaRecordatorio(string fecha)
+        {
+            con.Open();
+            string query = "select Fecha from Notificaciones1 where Fecha = '" +fecha+ "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reg = cmd.ExecuteReader();
+
+            if (reg.Read())
+            {
+                return reg["Fecha"].ToString();
+            }
+            else
+            {
+                return "Null";
+            }
+            //con.Close();
+        }
+
+        //Consulta para llenado automático de Notificaciones
+
+        public DataTable consultaTablaNotificaciones(string num)
+        {
+            string query = "select NoCot, Nombre, Fecha, Atendió, Teléfono from Notificaciones1 where Fecha = '" +num+ "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable tabla = new DataTable();
+            data.Fill(tabla);
+
+            return tabla;
+        }
+
+        //Modificación de Notificaciones
+
+        public int modificarNotificaciones(string num, string fec)
+        {
+            int flag = 0;
+
+            con.Open();
+
+            string Query = "update Notificaciones1 set Fecha = '" + fec + "' where NoCot = '" + num + "'";
+
+            SqlCommand cmd = new SqlCommand(Query, con);
+            flag = cmd.ExecuteNonQuery();
+
+            con.Close();
+
+            return flag;
+        }
+
+        //Modificación de Fecha en Recordatorio de Cotización
+
+        public int modificarSoloFecha(string num, string fec)
+        {
+            int flag = 0;
+
+            con.Open();
+
+            string Query = "update CotizacionesEjemplo set Recordar = '" + fec + "' where NoCot = '" + num + "'";
+
+            SqlCommand cmd = new SqlCommand(Query, con);
+            flag = cmd.ExecuteNonQuery();
+
+            con.Close();
+
+            return flag;
+        }
+
+        //Eliminación de Notificaciones
+
+        public int eliminarNotificaciones(string num)
+        {
+            int flag = 0;
+            con.Open();
+
+            string query = "delete from Notificaciones1 where NoCot = '" + num + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            flag = cmd.ExecuteNonQuery();
+            con.Close();
+
+            return flag;
+        }
+
+        //-------------------------------------------------------------------------
+
+        //CONSULTAS Y ESTADÍSTICAS
+
+        //Llenado del data grid view Productos
+
+        public DataTable TablaProductos()
+        {
+            string query = "select Codigo, Nombre from Productos order by Codigo";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable tabla = new DataTable();
+            data.Fill(tabla);
+
+            return tabla;
+        }
+
+        //Llenado del data grid view Clientes
+
+        public DataTable TablaClientes()
+        {
+            string query = "select Nombre from Clientes order by Nombre";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable tabla = new DataTable();
+            data.Fill(tabla);
+
+            return tabla;
+        }
+
+        //Consulta para llenado de tabla de Estadísticas
+
+        public DataTable consultaTablaEstadisticas(string desde, string hasta, string cod, string pro, string cli)
+        {
+            string query = "select NoCot, Cliente, Codigo, Concepto, PU, Cantidad, Importe as Subtotal, " +
+                "(cast(Importe as float) + (cast(Importe as float) * 0.16)) as Total " +
+                "from pedidosProductosEjemplo10 where Fecha between cast('"+desde+"' as date) and cast('"+hasta+"' as date) " +
+                "and Codigo like '%"+cod+"%' and Cliente like '%"+cli+"%' and Concepto like '%"+pro+"%'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable tabla = new DataTable();
+            data.Fill(tabla);
+
+            return tabla;
+        }
+
+        //Consulta de resultados
+
+        public Tuple<string, string, string> consultaResultados(string desde, string hasta, string cod, string cli, string pro)
+        {
+            con.Open();
+            string query = "select sum(cast(Importe as float)) as Subtotal, sum((cast(Importe as float)) * 0.16) as Total, " +
+                "sum(cast(Cantidad as int)) as Cantidad from pedidosProductosEjemplo10 where " +
+                "Fecha between cast('" + desde + "' as date) and cast('" + hasta + "' as date) and " +
+                "Codigo like '%" + cod + "%' and Cliente like '%" + cli + "%' and Concepto like '%" + pro + "%'";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reg = cmd.ExecuteReader();
+
+            if (reg.Read())
+            {
+                return Tuple.Create
+                    (
+                    reg["Subtotal"].ToString(), reg["Total"].ToString(),reg["Cantidad"].ToString()
+                    );
+            }
+            else
+            {
+                return Tuple.Create("Null", "", "");
+            }
+            //con.Close();
+        }
 
     }
 }
