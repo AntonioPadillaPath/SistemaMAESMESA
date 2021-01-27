@@ -15,6 +15,7 @@ namespace Entidades
         private string cantidad;
         private string precio;
         private string importe;
+        private string fecha;
 
         public string Codigo { get => codigo; set => codigo = value; }
         public string Concepto { get => concepto; set => concepto = value; }
@@ -23,5 +24,6 @@ namespace Entidades
         public string Importe { get => importe; set => importe = value; }
         public string Nocot { get => nocot; set => nocot = value; }
         public string Cliente { get => cliente; set => cliente = value; }
+        public string Fecha { get => fecha; set => fecha = value; }
     }
 }
